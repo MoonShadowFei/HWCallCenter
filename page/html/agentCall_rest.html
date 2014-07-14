@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Rest Window</title>
+<link   rel="stylesheet" type="text/css"  href="../style/style.css"  />
+<script type="text/javascript" src="../openjs/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<script type="text/javascript">
+
+function agentStatusOperation_doRest()
+{
+	var restReasonId = $("#agentStatus_restWindow_restReason").val().trim();
+	var restTime =  $("#agentStatus_restWindow_Time").val().trim();
+	var regex = /[^\d]/;
+	if(regex.test(restTime))
+	{
+		alert("The rest duration ranges from 1 minute to 24 hours");
+		return;
+	}
+	
+	if (restTime < 1 || restTime > 1439){
+		
+		alert("The rest duration ranges from 1 minute to 24 hours");
+		return;
+	}
+	
+	var retResult = window.opener.agentStatusOperation_toRest(restTime, restReasonId);
+	if (retResult != 0)
+	{
+		alert("request rest failed. Retcode :" + retResult);
+	}
+	else
+	{
+		closeWin();
+	}
+}
+
+
+function closeWin()
+{
+	window.opener=null; 
+	window.open('','_self'); 
+	window.close(); 
+}
+
+function init_load()
+{
+	var retJson = window.opener.agentStatusOperation_getRestReason();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var restReasonList = retJson.result;
+		if(null != restReasonList){
+			var len = restReasonList.length;
+			var buffer = [];
+			for(var i = 0; i < len; i++)
+			{
+				buffer.push("<option value=" + restReasonList[i].restReasonId +">" + restReasonList[i].restReason + "</option>");
+			}
+			
+		}
+		$("#agentStatus_restWindow_restReason").append(buffer.join(""));
+	}
+}
+</script>
+</head>
+<body onload="init_load();">
+
+<!-- Request rest window begin -->
+<div id="agentStatus_restWindow">
+	<table width="100%"  class="content_form_table" cellpadding="1" cellspacing="0" >
+		<tr>
+			<td class="content_form_fieldname">Rest Reason</td>
+			<td><select id="agentStatus_restWindow_restReason"></select></td>
+		</tr>
+		<tr>
+			<td class="content_form_fieldname">Rest Time</td>
+			<td><input type="text" id="agentStatus_restWindow_Time" maxlength="4"/>(mins)</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="Submit" onclick="agentStatusOperation_doRest()" />
+				<input type="button" value="Close" onclick="closeWin()"/>
+			</td>
+			
+		</tr>
+	</table>
+</div>
+<!-- Request rest window End -->
+</body>
+</html>

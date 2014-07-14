@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Inner Help Window</title>
+<link   rel="stylesheet" type="text/css"  href="../style/style.css"  />
+<script type="text/javascript" src="../openjs/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<script type="text/javascript" src="../js/common/constants.js"></script>
+<script type="text/javascript">
+/**
+ * refresh workno list
+ */
+function agentCallOperation_refreshWorknoList()
+{
+	var retJson = window.opener.agentCallOperation_getAllOnlineAgents();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var list =  retJson.result;
+		var len = list.length;
+		var workBean="";
+		var buffer = [];
+		var isCheck = "checked='checked'";
+		for (var i = 0; i < len; i++)
+		{
+			workBean = list[i];
+			if (workBean.workno == window.opener.global_agentInfo.agentId)
+			{
+				continue;
+			}
+			if (workBean.status == AGENT_STATE.WORKING
+					|| workBean.status == AGENT_STATE.IDLE)
+			{
+				buffer.push("<tr><td><input type='radio' name='agentCall_innerHelpWindow_workNo' " + isCheck + " value='" + workBean.workno  + "'/></td>" +
+						"<td>" + workBean.workno + "</td><td>" + (workBean.status == AGENT_STATE.WORKING ? AGENT_STATE_DES.WORKING : AGENT_STATE_DES.IDLE)+ "</td></tr>");
+				isCheck = "";
+			}
+			
+		}
+		$("#agentCall_innerHelpWindow_worklist tbody").empty();
+		$("#agentCall_innerHelpWindow_worklist tbody").append(buffer.join(""));
+	}
+	else
+	{
+		alert("query online agent failed. Retcode : " + retResult);
+	}	
+}
+
+/**
+ * refresh skill list
+ */
+function agentCallOperation_refreshSkillList()
+{
+	var retJson = window.opener.agentCallOperation_getAllSkills();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var list =  retJson.result;
+		var len = list.length;
+		var skillBean="";
+		var buffer = [];
+		var isCheck = "checked='checked'";
+		for (var i = 0; i < len; i++)
+		{
+			skillBean = list[i]; 
+			if (skillBean.mediatype == 5)
+			{
+				buffer.push("<tr><td><input type='radio' name='agentCall_innerHelpWindow_skillId' " + isCheck + " value='" + skillBean.id + "'/></td>" +
+					"<td>" + skillBean.name + "</td></tr>");
+				isCheck = "";
+			}
+			
+		}
+		$("#agentCall_innerHelpWindow_skilllist tbody").empty();
+		$("#agentCall_innerHelpWindow_skilllist tbody").append(buffer.join(""));
+	}
+	else
+	{
+		alert("query skill  failed. Retcode : " + retResult);
+	}	
+	
+}
+
+
+function closeWin()
+{
+	window.opener=null; 
+	window.open('','_self'); 
+	window.close(); 
+}
+
+var currentShowDiv = 1;
+
+function showWorkOrList(type)
+{
+	if (type == 1)
+	{
+		currentShowDiv = 1;
+		$("#agentCall_innerHelpWindow_workDiv").show();
+		$("#agentCall_innerHelpWindow_skillDiv").hide();
+	}
+	else
+	{
+		currentShowDiv = 2;
+		$("#agentCall_innerHelpWindow_workDiv").hide();
+		$("#agentCall_innerHelpWindow_skillDiv").show();
+	}
+	agentCallOperation_refreshWindow();
+}
+
+
+function agentCallOperation_refreshWindow()
+{
+	if (currentShowDiv == 1)	
+	{
+		agentCallOperation_refreshWorknoList();
+	}
+	else
+	{
+		agentCallOperation_refreshSkillList();
+	}
+}
+
+
+function agentCallOperation_submit()
+{
+	var deviceType = 1;
+	var dstAddress = "";
+	var mode = $("input[name='agentCall_innerHelpWindow_mode']:checked").val();
+	if (currentShowDiv == 1)
+	{
+		deviceType = 2;
+		dstAddress = $("input[name='agentCall_innerHelpWindow_workNo']:checked").val();
+	}
+	else
+	{
+		dstAddress = $("input[name='agentCall_innerHelpWindow_skillId']:checked").val();
+	}
+	
+	if (dstAddress == "")
+	{
+		alert("Please select one agent or one skill.");
+		return;
+	}
+	var retResult = window.opener.agentCallOperation_toInnerHelp(deviceType, mode, dstAddress);
+	if(0 == retResult)
+	{	
+		closeWin();
+	}
+	else
+	{
+		alert("Inner help failed. Retcode : " + retResult);
+	}
+	
+}
+</script>
+</head>
+<body onload="agentCallOperation_refreshWindow()">
+<!--  Inner call window begin -->
+<div>
+	<div>
+		<a href='#' style="cursor: pointer;text-decoration:none;" onclick="showWorkOrList(1)"><div style="display: block; float: left;padding: 10px;border:1px solid #F00">To Agent</div></a>
+		<a href='#' style="cursor: pointer;text-decoration:none;" onclick="showWorkOrList(2)"><div style="display: block; float: left;padding: 10px;margin-left: 10px; border:1px solid #F00">To Skill</div></a>
+	</div>
+	<div style="clear: both;"></div>
+	<div style="height: 350px;overflow-y:auto;overflow-x:hidden;margin-top: 10px;margin-bottom: 10px" >
+		<div id="agentCall_innerHelpWindow_workDiv">
+			<table id="agentCall_innerHelpWindow_worklist" width="100%"  class="content_form_table" cellpadding="1" cellspacing="0" >
+				<thead>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>Other Agent</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		<div id="agentCall_innerHelpWindow_skillDiv" style="display: none">
+			<table id="agentCall_innerHelpWindow_skilllist" width="100%">
+				<thead>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>Skill Name</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br/>
+	<div style="margin-bottom: 10px">
+		<input type="radio" checked="checked" value="1" name="agentCall_innerHelpWindow_mode"/><label>Tow-party</label>
+		<input type="radio"  value="2"  name="agentCall_innerHelpWindow_mode"/><label>Three-party</label>
+	</div>
+	<br/>
+	<div>
+		<input type="button" value="Submit" onclick="agentCallOperation_submit()" />
+		<input type="button" value="Refresh" onclick="agentCallOperation_refreshWindow()"/>
+		<input type="button" value="Close" onclick="closeWin()"/>
+	</div>
+</div>
+<!--  Inner call window end -->
+</body>
+</html>

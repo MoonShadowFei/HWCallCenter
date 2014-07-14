@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+.login_fieldname{
+	float: left;
+	width: 100px;
+	font-size: 14px;
+	text-align:right;
+}
+.clear{
+	clear: both;
+}
+
+
+.content_form_table
+{
+	border:1px solid #9db3c5;
+}
+.content_form_table td
+{
+	border:1px solid #9db3c5;
+ 	padding:0 1em 0;
+}
+
+.content_form_table thead td
+{
+	background-color: #D8DFEA;
+}
+
+.content_form_table .content_form_fieldname
+{
+	background-color: #D8DFEA;
+}

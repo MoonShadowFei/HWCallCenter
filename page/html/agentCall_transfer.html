@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tranfer Window</title>
+<link   rel="stylesheet" type="text/css"  href="../style/style.css"  />
+<script type="text/javascript" src="../openjs/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<script type="text/javascript" src="../js/common/constants.js"></script>
+<script type="text/javascript">
+/**
+ * refresh workno list
+ */
+function agentCallOperation_refreshWorknoList()
+{
+	var retJson = window.opener.agentCallOperation_getAllOnlineAgents();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var list =  retJson.result;
+		var len = list.length;
+		var workBean="";
+		var buffer = [];
+		var isCheck = "checked='checked'";
+		for (var i = 0; i < len; i++)
+		{
+			workBean = list[i];
+			if (workBean.workno == window.opener.global_agentInfo.agentId)
+			{
+				continue;
+			}
+			if (workBean.status == AGENT_STATE.WORKING
+					|| workBean.status == AGENT_STATE.IDLE)
+			{
+				buffer.push("<tr><td><input type='radio' name='agentCall_transferWindow_workNo' " + isCheck + " value='" + workBean.workno  + "'/></td>" +
+						"<td>" + workBean.workno + "</td><td>" + (workBean.status == AGENT_STATE.WORKING ? AGENT_STATE_DES.WORKING : AGENT_STATE_DES.IDLE)+ "</td></tr>");
+				isCheck = "";
+			}
+			
+		}
+		$("#agentCall_transferWindow_worklist tbody").empty();
+		$("#agentCall_transferWindow_worklist tbody").append(buffer.join(""));
+	}
+	else
+	{
+		alert("query online agent failed. Retcode : " + retResult);
+	}	
+}
+
+/**
+ * refresh skill list
+ */
+function agentCallOperation_refreshSkillList()
+{
+	var retJson = window.opener.agentCallOperation_getAllSkills();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var list =  retJson.result;
+		var len = list.length;
+		var skillBean="";
+		var buffer = [];
+		var isCheck = "checked='checked'";
+		for (var i = 0; i < len; i++)
+		{
+			skillBean = list[i]; 
+			if (skillBean.mediatype == 5)
+			{
+				buffer.push("<tr><td><input type='radio' name='agentCall_transferWindow_skillId' " + isCheck + " value='" + skillBean.id + "'/></td>" +
+					"<td>" + skillBean.name + "</td></tr>");
+				isCheck = "";
+			}
+			
+		}
+		$("#agentCall_transferWindow_skilllist tbody").empty();
+		$("#agentCall_transferWindow_skilllist tbody").append(buffer.join(""));
+	}
+	else
+	{
+		alert("query skill  failed. Retcode : " + retResult);
+	}	
+	
+}
+
+
+function agentCallOperation_refreshIVRList()
+{
+	var retJson = window.opener.agentCallOperation_getAllIVRs();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var list =  retJson.result;
+		var len = list.length;
+		var ivrBean="";
+		var buffer = [];
+		var isCheck = "checked='checked'";
+		for (var i = 0; i < len; i++)
+		{
+			ivrBean = list[i]; 
+			buffer.push("<tr><td><input type='radio' name='agentCall_transferWindow_ivraccesscode' " + isCheck + " value='" + ivrBean.access + "'/></td>" 
+					+ "<td>" + ivrBean.access + "</td>"
+					+ "<td>" + ivrBean.description + "</td></tr>");
+			isCheck = "";
+			
+		}
+		$("#agentCall_transferWindow_IVRlist tbody").empty();
+		$("#agentCall_transferWindow_IVRlist tbody").append(buffer.join(""));
+	}
+	else
+	{
+		alert("query ivr  failed. Retcode : " + retResult);
+	}	
+}
+
+
+
+function agentCallOperation_refreshAccessCodeList()
+{
+	var retJson = window.opener.agentCallOperation_getAllAccessCodes();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var list =  retJson.result;
+		var len = list.length;
+		var accessCodeBean="";
+		var buffer = [];
+		var isCheck = "checked='checked'";
+		for (var i = 0; i < len; i++)
+		{
+			accessCodeBean = list[i]; 
+			buffer.push("<tr><td><input type='radio' name='agentCall_transferWindow_accesscode' " + isCheck + " value='" + accessCodeBean.inno + "'/></td>" 
+					+ "<td>" + accessCodeBean.inno + "</td>"
+					+ "<td>" + accessCodeBean.description + "</td></tr>");
+			isCheck = "";
+			
+		}
+		$("#agentCall_transferWindow_accesscodelist tbody").empty();
+		$("#agentCall_transferWindow_accesscodelist tbody").append(buffer.join(""));
+	}
+	else
+	{
+		alert("query accesscode  failed. Retcode : " + retResult);
+	}	
+	
+}
+
+function closeWin()
+{
+	window.opener=null; 
+	window.open('','_self'); 
+	window.close(); 
+}
+
+var currentShowDiv = 1;
+
+
+function showDisplayDiv(type)
+{
+	currentShowDiv = type;
+	$("#agentCallOperation_refresh").hide();
+	$("#agentCall_transferWindow_workDiv").hide();
+	$("#agentCall_transferWindow_skillDiv").hide();
+    $("#agentCall_transferWindow_ivrDiv").hide();
+    $("#agentCall_transferWindow_accesscodeDiv").hide();
+    $("#agentCall_transferWindow_externalDiv").hide();
+    $("#agentCall_transferWindow_mode_workno").hide();
+    $("#agentCall_transferWindow_mode_skill").hide();
+    $("#agentCall_transferWindow_mode_ivr").hide();
+    $("#agentCall_transferWindow_mode_accesscode").hide();
+    $("#agentCall_transferWindow_mode_external").hide();
+	if (type == 1)
+	{
+		$("#agentCall_transferWindow_workDiv").show();
+		$("#agentCall_transferWindow_mode_workno").show();
+		$("#agentCallOperation_refresh").show();
+	}
+	else if (type == 2)
+	{
+		$("#agentCall_transferWindow_skillDiv").show();
+		$("#agentCall_transferWindow_mode_skill").show();
+	} 
+	else if (type == 3)
+	{
+		$("#agentCall_transferWindow_ivrDiv").show();
+		$("#agentCall_transferWindow_mode_ivr").show();
+	}
+	else if (type == 4)
+	{
+		$("#agentCall_transferWindow_accesscodeDiv").show();
+		$("#agentCall_transferWindow_mode_accesscode").show();
+	}
+	else if (type == 5)
+	{
+		$("#agentCall_transferWindow_externalDiv").show();
+		$("#agentCall_transferWindow_mode_external").show();
+	}
+}
+
+
+function agentCallOperation_refreshWindow()
+{
+	agentCallOperation_refreshWorknoList();
+}
+
+
+function agentCallOperation_submit()
+{
+	var deviceType = 0;
+	var mode = 0;
+	var address = "";
+	var mediaability = 0;
+	if (currentShowDiv == 1)
+	{
+		deviceType = 2;
+		mode = $("input[name='agentCall_transferWindow_mode_workno_type']:checked").val();
+		address =  $("input[name='agentCall_transferWindow_workNo']:checked").val();
+		if (address == "")
+		{
+			alert("Please select one workno");
+			return;
+		}
+	}
+	else if (currentShowDiv == 2)
+	{
+		deviceType = 1;
+		mode = $("input[name='agentCall_transferWindow_mode_skill_type']:checked").val();
+		address =  $("input[name='agentCall_transferWindow_skillId']:checked").val();
+		if (address == "")
+		{
+			alert("Please select one skill");
+			return
+		}
+	}
+	else if (currentShowDiv == 3)
+	{
+		deviceType = 3;
+		mode = $("input[name='agentCall_transferWindow_mode_ivr_type']:checked").val();
+		address =  $("input[name='agentCall_transferWindow_ivraccesscode']:checked").val();
+		if (address == "")
+		{
+			alert("Please select one ivr");
+			return
+		}
+	}
+	else if (currentShowDiv == 4)
+	{
+		deviceType = 4;
+		mode = $("input[name='agentCall_transferWindow_mode_accesscode_type']:checked").val();
+		address =  $("input[name='agentCall_transferWindow_accesscode']:checked").val();
+		if (address == "")
+		{
+			alert("Please select one accesscode");
+			return
+		}
+	}
+	else
+	{
+		deviceType = 5;
+		mode = $("input[name='agentCall_transferWindow_mode_external_type']:checked").val();
+		address =  $("#agentCall_transferWindow_externalDiv_customer").val().trim();
+		var regex = /[^\d#*]/; 	
+		if (address == "" || regex.test(address))
+		{
+			alert("The dial number contains only digits, *, and #.");
+			return;
+		}
+	}
+	var retResult = window.opener.agentCallOperation_toTransfer(deviceType, mode, address, mediaability);
+	if (retResult != 0)
+	{
+		alert("Transfer failed.  Retcode : " + retResult);
+	}
+	else
+	{
+		closeWin();
+	}
+}
+
+
+function init_load()
+{
+	agentCallOperation_refreshWorknoList();
+	agentCallOperation_refreshSkillList();
+	agentCallOperation_refreshIVRList();
+	agentCallOperation_refreshAccessCodeList();
+}
+</script>
+</head>
+<body onload="init_load()">
+<div>
+	<div>
+		<a href='#' style="cursor: pointer;text-decoration:none;" onclick="showDisplayDiv(1)"><div style="display: block; float: left;padding: 10px;border:1px solid #F00">To Agent</div></a>
+		<a href='#' style="cursor: pointer;text-decoration:none;" onclick="showDisplayDiv(2)"><div style="display: block; float: left;padding: 10px;margin-left: 10px; border:1px solid #F00">To Skill</div></a>
+		<a href='#' style="cursor: pointer;text-decoration:none;" onclick="showDisplayDiv(3)"><div style="display: block; float: left;padding: 10px;margin-left: 10px; border:1px solid #F00">To IVR</div></a>
+		<a href='#' style="cursor: pointer;text-decoration:none;" onclick="showDisplayDiv(4)"><div style="display: block; float: left;padding: 10px;margin-left: 10px; border:1px solid #F00">To Accesscode</div></a>
+		<a href='#' style="cursor: pointer;text-decoration:none;" onclick="showDisplayDiv(5)"><div style="display: block; float: left;padding: 10px;margin-left: 10px; border:1px solid #F00">To External</div></a>
+	</div>
+	<div style="clear: both;"></div>
+	<div >
+		<div id="agentCall_transferWindow_workDiv" style="height: 350px;overflow-y:auto;overflow-x:hidden;margin-top: 10px;margin-bottom: 10px">
+			<table id="agentCall_transferWindow_worklist" width="100%"  class="content_form_table" cellpadding="1" cellspacing="0">
+				<thead>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>Other Agent</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		<div id="agentCall_transferWindow_skillDiv" style="height: 350px;overflow-y:auto;overflow-x:hidden;margin-top: 10px;margin-bottom: 10px;display: none">
+			<table id="agentCall_transferWindow_skilllist" width="100%"  class="content_form_table" cellpadding="1" cellspacing="0">
+				<thead>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>Skill Name</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		
+		<div id="agentCall_transferWindow_ivrDiv" style="height: 350px;overflow-y:auto;overflow-x:hidden;margin-top: 10px;margin-bottom: 10px;display: none">
+			<table id="agentCall_transferWindow_IVRlist" width="100%"  class="content_form_table" cellpadding="1" cellspacing="0">
+				<thead>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>Access Code</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		
+		<div id="agentCall_transferWindow_accesscodeDiv" style="height: 350px;overflow-y:auto;overflow-x:hidden;margin-top: 10px;margin-bottom: 10px;display: none">
+			<table id="agentCall_transferWindow_accesscodelist" width="100%"  class="content_form_table" cellpadding="1" cellspacing="0">
+				<thead>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>Access Code</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		
+		<div id="agentCall_transferWindow_externalDiv" style="height: 150px;overflow-y:auto;overflow-x:hidden;margin-top: 10px;margin-bottom: 10px;display: none">
+			<table width="100%" class="content_form_table" cellpadding="1" cellspacing="0">
+				<tbody>
+					<tr>
+						<td class="content_form_fieldname">Customer Phone</td>
+						<td><input type="text" id="agentCall_transferWindow_externalDiv_customer" maxlength="24"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div style="margin-bottom: 10px">
+		<div id="agentCall_transferWindow_mode_workno">
+			<input type="radio" checked="checked" value="0" name="agentCall_transferWindow_mode_workno_type"/><label>Blind Transfer</label>
+			<input type="radio"  value="2"  name="agentCall_transferWindow_mode_workno_type"/><label>Success Transfer</label>
+			<input type="radio"  value="3"  name="agentCall_transferWindow_mode_workno_type"/><label>Special Transfer</label>
+		</div>
+		<div id="agentCall_transferWindow_mode_skill" style="display: none">
+			<input type="radio" checked="checked" value="0" name="agentCall_transferWindow_mode_skill_type"/><label>Blind Transfer</label>
+			<input type="radio"  value="2"  name="agentCall_transferWindow_mode_skill_type"/><label>Success Transfer</label>
+		</div>
+		<div id="agentCall_transferWindow_mode_ivr" style="display: none">
+			<input type="radio" checked="checked" value="0" name="agentCall_transferWindow_mode_ivr_type"/><label>Blind Transfer</label>
+			<input type="radio"  value="1"  name="agentCall_transferWindow_mode_ivr_type"/><label>Blocked Transfer</label>
+		</div>
+		<div id="agentCall_transferWindow_mode_accesscode" style="display: none">
+			<input type="radio" checked="checked" value="0" name="agentCall_transferWindow_mode_accesscode_type"/><label>Blind Transfer</label>
+			<input type="radio"  value="2"  name="agentCall_transferWindow_mode_accesscode_type"/><label>Success Transfer</label>
+		</div>
+		<div id="agentCall_transferWindow_mode_external" style="display: none">
+			<input type="radio" checked="checked" value="1" name="agentCall_transferWindow_mode_external_type"/><label>The agent releases the call no matter whether the transfer-to customer answers the call.</label>
+			<br/>
+			<input type="radio"  value="2"  name="agentCall_transferWindow_mode_external_type"/><label>The agent releases the call only after the transfer-to customer answers the call.</label>
+			<br/>
+			<input type="radio"  value="3"  name="agentCall_transferWindow_mode_external_type"/><label>The agent releases the call after talking with the transfer-to party.</label>
+			<br/>
+			<input type="radio"  value="4"  name="agentCall_transferWindow_mode_external_type"/><label>The agent releases the call after setting up a three-party call.</label>
+		</div>
+	</div>
+	<div>
+		<input type="button" value="Submit" onclick="agentCallOperation_submit()" />
+		<input type="button" id="agentCallOperation_refresh" value="Refresh" onclick="agentCallOperation_refreshWindow()"/>
+		<input type="button" value="Close" onclick="closeWin()"/>
+	</div>
+</div>
+</body>
+</html>

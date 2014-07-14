@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ThreeParty List Window</title>
+<link   rel="stylesheet" type="text/css"  href="../style/style.css"  />
+<script type="text/javascript" src="../openjs/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<script type="text/javascript" src="../js/common/constants.js"></script>
+<script type="text/javascript">
+function closeWin()
+{
+	window.opener=null; 
+	window.open('','_self'); 
+	window.close(); 
+}
+
+
+
+function agentCallOperation_refreshHoldCallList()
+{
+	var retJson = window.opener.agentCallOperation_getHoldList();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var holdCallList = retJson.result;
+		if (holdCallList != null)
+		{
+			/**
+			 * {"message":"","retcode":"0","result":[{"called":"40102","caller":"1008622","callid":
+			 * "1398078481-28","calldata":null,"orgicallednum":"","callfeature":7,"callskill":"",
+			 * "begintime":null,"endtime":null,"callskillid":0}]}
+			 */
+			var buffer = [];
+			var len = holdCallList.length;
+			for (var i = 0; i < len; i++)
+			{
+				buffer.push("<tr><td>");
+				buffer.push("<input type='radio' name='agentCall_holdCallWindow_callId' value='" + holdCallList[i].callid +"'");
+				if (i == 0)
+				{
+					buffer.push(" checked='checked' ");
+				}
+				buffer.push("/>");		
+				buffer.push("</td><td>");
+				if (holdCallList[i].callfeature == CALL_FEATURE.FEATURE_OUT)
+				{
+					buffer.push(holdCallList[i].called);
+				}
+				else
+				{
+					buffer.push(holdCallList[i].caller);
+				}
+				
+				buffer.push("</td></tr>");
+			}
+			$("#agentCall_holdCallWindow_list tbody").empty();
+			$("#agentCall_holdCallWindow_list tbody").append(buffer.join(""));
+		}
+	}
+	else
+	{
+		alert("Query held call failed. Retcode : " + retResult);
+	}	
+}
+
+
+function agentCallOperation_submit()
+{
+	var currentCallId = $("input[name='agentCall_holdCallWindow_callId']:checked").val();
+	if (currentCallId == "")
+	{
+		alert("Please select one hold call.");
+		return;
+	}
+	var retResult = window.opener.agentCallOperation_toThreeParty(currentCallId)	
+    if (retResult != 0)
+	{
+		alert("Call out failed.  Retcode : " + retResult);
+	}
+	else
+	{
+		closeWin();
+	}
+}
+</script>
+</head>
+<body onload="agentCallOperation_refreshHoldCallList()">
+<!-- Show hold call window begin -->
+<div id="agentCall_holdCallWindow">
+	<table width="100%" id="agentCall_holdCallWindow_list"  class="content_form_table" cellpadding="1" cellspacing="0" >
+		<thead>
+			<tr>
+			    <td></td>
+				<td>Customer Phone Number</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<br/>
+	<div>
+		<input type="button" value="Submit" onclick="agentCallOperation_submit()" />
+		<input type="button" value="Refresh" onclick="agentCallOperation_refreshHoldCallList()"/>
+		<input type="button" value="Close" onclick="closeWin()"/>
+	</div>
+</div>
+<!-- Show hold call window end -->
+</body>
+</html>

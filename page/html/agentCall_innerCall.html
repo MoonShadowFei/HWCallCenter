@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Inner Call Window</title>
+<link   rel="stylesheet" type="text/css"  href="../style/style.css"  />
+<script type="text/javascript" src="../openjs/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<script type="text/javascript" src="../js/common/constants.js"></script>
+<script type="text/javascript">
+
+function agentCallOperation_refreshInnercallWindow()
+{
+	var retJson = window.opener.agentCallOperation_getAllOnlineAgents();
+	var retResult = retJson.retcode;
+	if(0 == retResult)
+	{	
+		var list =  retJson.result;
+		var len = list.length;
+		var workBean="";
+		var buffer = [];
+		var isCheck = "checked='checked'";
+		for (var i = 0; i < len; i++)
+		{
+			workBean = list[i];
+			if (workBean.workno == window.opener.global_agentInfo.agentId)
+			{
+				continue;
+			}
+			if (workBean.status == AGENT_STATE.WORKING
+					|| workBean.status == AGENT_STATE.IDLE)
+			{
+				buffer.push("<tr><td><input type='radio' name='agentCall_innercallWindow_workNo' " + isCheck + " value='" + workBean.workno  + "'/></td>" +
+						"<td>" + workBean.workno + "</td><td>" + (workBean.status == AGENT_STATE.WORKING ? AGENT_STATE_DES.WORKING : AGENT_STATE_DES.IDLE)+ "</td></tr>");
+				isCheck = "";
+			}
+			
+		}
+		$("#agentCall_innercallWindow_list tbody").empty();
+		$("#agentCall_innercallWindow_list tbody").append(buffer.join(""));
+	}
+	else
+	{
+		alert("query online agent failed. Retcode : " + retResult);
+	}	
+}
+
+function agentCallOperation_submit()
+{
+	var agentWorkno = $("input[name='agentCall_innercallWindow_workNo']:checked").val();
+	if (agentWorkno == "")
+	{
+		alert("Please select one agent.");
+		return;
+	}
+	var retResult = window.opener.agentCallOperation_toInnerCall(agentWorkno);
+	if(0 == retResult)
+	{	
+		closeWin();
+	}
+	else
+	{
+		alert("Inner call failed. Retcode : " + retResult);
+	}
+}
+
+function closeWin()
+{
+	window.opener=null; 
+	window.open('','_self'); 
+	window.close(); 
+}
+</script>
+</head>
+<body onload="agentCallOperation_refreshInnercallWindow()">
+<!--  Inner call window begin -->
+<div id="agentCall_innercallWindow" >
+	<table id="agentCall_innercallWindow_list" width="100%" class="content_form_table" cellpadding="1" cellspacing="0" >
+		<thead>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;</td>
+				<td>Other Agent</td>
+				<td>Status</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<br/>
+	<div>
+		<input type="button" value="Submit" onclick="agentCallOperation_submit()" />
+		<input type="button" value="Refresh" onclick="agentCallOperation_refreshInnercallWindow()"/>
+		<input type="button" value="Close" onclick="closeWin()"/>
+	</div>
+</div>
+<!--  Inner call window end -->
+</body>
+</html>

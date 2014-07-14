@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="favicon.ico" />
+<title>eSpace Agent Client Demo</title>
+<link href="page/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="page/openjs/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="page/openjs/json.js"></script>
+<script type="text/javascript" src="http://localhost:8060/agentgateway/resource-js"></script>
+<script type="text/javascript">
+ REST.apiURL = "http://localhost:8060/agentgateway/resource/";
+</script> 
+<script type="text/javascript" src="page/js/common/common.js"></script>
+<script type="text/javascript" src="page/js/common/constants.js"></script>
+<script type="text/javascript" src="page/js/common/agentInfo.js"></script>
+<script type="text/javascript" src="page/js/common/callInfo.js"></script>
+<script type="text/javascript" src="page/js/common/buttonInfo.js"></script>
+<script type="text/javascript" src="page/js/common/hashMap.js"></script>
+<script type="text/javascript" src="page/js/common/resultCode.js"></script>
+<script type="text/javascript" src="page/js/common/globalVariable.js"></script>
+<script type="text/javascript" src="page/js/common/agentConsole.js"></script>
+<script type="text/javascript" src="page/js/eventHandle/eventHandle.js"></script>
+<script type="text/javascript" src="page/js/eventHandle/eventProcess.js"></script>
+<script type="text/javascript" src="page/js/eventHandle/agentStatus.js"></script>
+<script type="text/javascript" src="page/js/operation/agentLogin.js"></script>
+<script type="text/javascript" src="page/js/operation/agentStatusOperation.js"></script>
+<script type="text/javascript" src="page/js/operation/agentCallOperation.js"></script>
+<script type="text/javascript" src="page/js/operation/agentCallInfo.js"></script>
+</head>
+
+<body>
+<div>
+	<div style="text-align: center;font-size: 30px">eSpace Agent Client Demo</div>
+    <div>Agent Login</div>
+    <table cellpadding="1" cellspacing="0" class="content_form_table">
+    	<tr>
+    		<td class="content_form_fieldname">WorkNo</td>
+    		<td><input type="text" maxlength="5" id="agentLogin_agentId"/></td>
+    		<td class="content_form_fieldname">Password</td>
+    		<td><input type="text" maxlength="20" id="agentLogin_password"></input></td>
+    		<td class="content_form_fieldname">PhoneNumber</td>
+    		<td><input type="text" maxlength="24" id="agentLogin_phonenumber"></input></td>
+    	</tr>
+    	<tr>
+    		<td class="content_form_fieldname">LoginStatus</td>
+    		<td>
+	        	<select id="agentLogin_loginstatus">
+	        		<option value="4">Idle</option>
+	        		<option value="5">ACW</option>
+	        	</select>
+	        </td>
+	        <td class="content_form_fieldname">AlwaysOffHook</td>
+    		<td>
+	        	<select id="agentLogin_releasePhone">
+        			<option value="false">No</option>
+        			<option value="true">Yes</option>
+        		</select>
+	        </td>
+	        <td colspan="2">
+	        	<input id="agentLogin_login" value="Login" type="button" onclick="agentLogin_doLogin();"/>
+       			<input id="agentLogin_logout" value="Logout" type="button" onclick="agentLogin_doLogout();" disabled="disabled"/>
+	        </td>
+    	</tr>
+    </table>
+</div>
+<hr/>
+
+<!-- Agent status and call information Begin -->
+<div>
+   	<div style="float: left; width: 220px;">Agent Current Status:&nbsp;&nbsp;<span id="agentStatus_status"></span></div>
+   	<div style="float: left; width: 150px;">Hold Calls:&nbsp;&nbsp;
+		   	<span id="agentCall_holdCallNums"></span>
+	</div>
+   	<div>Agent Current Call:&nbsp;&nbsp;
+		   	<span id="agentCall_otherParty"></span>&nbsp;|&nbsp;
+			<span id="agentCall_callStatus"></span>&nbsp;|&nbsp;
+			<span id="agentCall_callFeature"></span>
+	</div>
+</div>
+<!-- Agent status and call information End -->
+
+<hr/>
+
+<!-- Agent status button Begin -->
+<div>
+	<div>Agent Status Button</div>
+	<div>
+		<input type="button" id="agentStatus_InWork" value="InWrok" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toWork()"/>
+		<input type="button" id="agentStatus_ExitWork" value="ExitWork" disabled="disabled" onclick="agentStatusOperation_toExitWork()"/>
+		<input type="button" id="agentStatus_rest" value="Rest" disabled="disabled" onclick="agentStatusOperation_showRestWindow()"/>
+		<input type="button" id="agentStatus_cancelRest" value="CancelRest" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toCancelRest()"/>
+		<input type="button" id="agentStatus_sayBusy" value="Busy" disabled="disabled" onclick="agentStatusOperation_toBusy()" />
+		<input type="button" id="agentStatus_sayIdle" value="Idle" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toIdle()"/>
+	</div>
+</div>
+<!-- Agent status button End -->
+
+
+<hr></hr>
+
+<!-- Agent call button Begin -->
+<div>
+	<div>Agent Call Control Button</div>
+	<div>
+		<input type="button" id="agentCall_answer" value="Answer" disabled="disabled"  onclick="agentCallOperation_toAnswer()"/>
+		<input type="button" id="agentCall_hangup" value="Hangup" disabled="disabled"  onclick="agentCallOperation_toHangUp()"/>
+		<input type="button" id="agentCall_hold"  value="Hold" disabled="disabled"  onclick="agentCallOperation_toHold()"/>
+		<input type="button" id="agentCall_unHold" value="Unhold" disabled="disabled" style="display: none;" onclick="agentCallOperation_showUnHold()"/>
+		<input type="button" id="agentCall_threeParty" value="3 Party" disabled="disabled"  onclick="agentCallOperation_showThreeParty()" />
+		<input type="button" id="agentCall_transfer" value="Transfer" disabled="disabled" onclick="agentCallOperation_showTransfer()"/>
+        <input type="button" id="agentCall_callout" value="Callout" disabled="disabled" onclick="agentCallOperation_showCallOut()"/>
+        <input type="button" id="agentCall_secondDial" value="SecondDial" disabled="disabled" onclick="agentCallOperation_showSecondDial()" />
+        <input type="button" id="agentCall_innercall" value="Innercall" disabled="disabled" onclick="agentCallOperation_showInnerCall()"/>
+        <input type="button" id="agentCall_innerhelp" value="Innerhelp" disabled="disabled" onclick="agentCallOperation_showInnerHelp()"/>
+        <input type="button" id="agentCall_mute"   value="Metu" disabled="disabled" onclick="agentCallOperation_toMetu()"/>
+        <input type="button" id="agentCall_unmute"   value="Unmetu" disabled="disabled" style="display: none;" onclick="agentCallOperation_toUnMetu()"/>
+	</div>
+</div>
+<!-- Agent call button End -->
+
+
+<hr></hr>
+<div>
+	<table cellpadding="1" cellspacing="0" class="content_form_table">
+		<tr>
+			<td class="content_form_fieldname">Is Auto Answer</td>
+			<td><input type="radio" value="0" name="agentSetting_autoAnswer" checked="checked" /><label>Yes</label><input type="radio" value="1" name="agentSetting_autoAnswer"/><label>No</label></td>
+			<td><input type="button" value="submit" onclick="agentCallOperation_toSetAutoAnswer()"/></td>
+		</tr>
+		<tr>
+			<td class="content_form_fieldname">Is Into ACW After Hangup</td>
+			<td><input type="radio" value="0" name="agentSetting_intoACW"/><label>Yes</label><input type="radio" value="1" name="agentSetting_intoACW" checked="checked"/><label>No</label></td>
+			<td><input type="button" value="submit" onclick="agentCallOperation_toSetIntoAcw()"/></td>
+		</tr>
+	</table>
+</div>
+<hr></hr>
+<div>
+	<div>Agent Console</div>
+	<div><input type="button" value="Clean Log" onclick="agentConsole_cleanLog()"/></div>
+	<div style="height: 300px;overflow-y: auto;overflow-x:hidden;">
+		<table id="agentConsole" cellpadding="1" cellspacing="0" class="content_form_table" style="width: 100%">
+			<colgroup>
+				<col width="150px"/>
+			</colgroup>
+        	<thead>
+            	<tr>
+                	<td>
+                      	Date
+                    </td>
+                    <td>
+                      	Message
+                    </td>
+                </tr>
+            </thead>
+			<tbody>
+            </tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

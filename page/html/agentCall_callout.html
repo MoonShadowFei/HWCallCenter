@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Call Out Window</title>
+<link   rel="stylesheet" type="text/css"  href="../style/style.css"  />
+<script type="text/javascript" src="../openjs/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<script type="text/javascript">
+
+function agentCallOperation_doCallOut()
+{
+	var phoneNo = $("#agentCall_calloutWindow_called").val().trim();
+	var regex = /[^\d#*]/; 	
+	if (phoneNo == "" || regex.test(phoneNo))
+	{
+		alert("The dial number contains only digits, *, and #.");
+		return;
+	}
+	var retResult = window.opener.agentCallOperation_toCallOut(phoneNo);
+	if (retResult != 0)
+	{
+		alert("Call out failed.  Retcode : " + retResult);
+	}
+	else
+	{
+		closeWin();
+	}
+}
+
+
+function closeWin()
+{
+	window.opener=null; 
+	window.open('','_self'); 
+	window.close(); 
+}
+</script>
+</head>
+<body>
+<!-- Call out window begin -->
+<div id="agentCall_calloutWindow" class="window_show">
+	<table width="100%" class="content_form_table" cellpadding="1" cellspacing="0" >
+		<tr>
+			<td class="content_form_fieldname">Called Number</td>
+			<td><input type="text" id="agentCall_calloutWindow_called"/></td>
+		</tr>
+	</table>
+	<br/>
+	<div>
+		<input type="button" value="Submit" onclick="agentCallOperation_doCallOut()" />
+		<input type="button" value="Close" onclick="closeWin()"/>
+	</div>
+</div>
+<!-- Call out window end -->
+</body>
+</html>
