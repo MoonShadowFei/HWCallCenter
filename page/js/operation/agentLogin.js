@@ -4,16 +4,16 @@
  */
 function agentLogin_doLogin()
 {
-    //var agentId = $("#agentLogin_agentId").val().trim();
-    var agentId = "131";
-    //var password = $("#agentLogin_password").val().trim();
-    var password = "";
-    //var phoneNumber = $("#agentLogin_phonenumber").val().trim();
-    var phoneNumber = "7109";
-    //var status = $("#agentLogin_loginstatus").val();
-    var status = "4";
-    //var releasePhone = $("#agentLogin_releasePhone").val();
-    var releasePhone = "false";
+    var agentId = $("#agentLogin_agentId").val().trim();
+    var password = $("#agentLogin_password").val().trim();
+    var phoneNumber = $("#agentLogin_phonenumber").val().trim();
+    var status = $("#agentLogin_loginstatus").val();
+    var releasePhone = $("#agentLogin_releasePhone").val();
+    //var agentId = "131";
+    //var password = "";
+    //var phoneNumber = "7109";
+    //var releasePhone = "false";
+    //var status = "4";
 	if (agentId == "")
 	{
 		alert("Please input workno!");
@@ -64,7 +64,7 @@ function agentLogin_login(agentId, password, phoneNumber, status, releasePhone)
 						agentLogin_doForceLogin(agentId, password, phoneNumber, status, releasePhone);
 					}
 					break;
-				default :
+				default :¡¤
 					alert("Error! Retcode : " + retCodeLogin + ". RetMessage:" +  resLogin.message);
 				break;
 			 }

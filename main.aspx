@@ -124,7 +124,7 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
         <option value="true">Yes</option>
     </select>
     </li>
-<li id="agentPanel_status" style="float:right;margin-left:10px;height:28px;margin-top:16px;margin-left:5px;margin-right:5px;border:1px;display:none;">
+<li id="agentPanel_status" style="float:right;margin-left:10px;height:20px;margin-left:5px;margin-right:5px;padding-top:2px;display:none;">
     <!-- Agent status and call information Begin -->
 <div style="margin-right: 20px;">
    	<div style="float: left; width: 160px;">Agent Status:&nbsp;&nbsp;<span id="agentStatus_status"></span></div>
@@ -211,7 +211,7 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 </div>
 
 <!--add for detail panel -->
-<div id="agent_DetailPanel" style="padding: 2px; border: 1px solid currentColor; top: 100px; width: 500px; height: 400px; right: 100px; float: right; position: absolute; z-index: 100; background-color: rgb(255, 255, 255);border:1px;border-color:#DDD;">
+<div id="agent_DetailPanel" style="padding: 2px; border: 1px solid currentColor; top: 100px; width: 500px; height: 400px; right: 100px; float: right; position: absolute; z-index: 100; background-color: rgb(255, 255, 255);border-color:#DDD;">
     <div>Agent Status Button</div>
 	<div>
 		<input type="button" id="agentStatus_InWork" value="InWrok" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toWork()"/>
