@@ -16,9 +16,9 @@
 <link href="page/style/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/ISV/page/openjs/jquery-1.6.2.js"></script>
 <script type="text/javascript" src="/ISVpage/openjs/json.js"></script>
-<script type="text/javascript" src="http://192.168.1.109:80/agentgateway/resource-js"></script>
+<script type="text/javascript" src="http://192.168.1.110:80/agentgateway/resource-js"></script>
 <script type="text/javascript">
-    REST.apiURL = "http://192.168.1.109:80/agentgateway/resource/";
+    REST.apiURL = "http://192.168.1.110:80/agentgateway/resource/";
 </script> 
 <script type="text/javascript" src="/ISV/page/js/common/common.js"></script>
 <script type="text/javascript" src="/ISV/page/js/common/constants.js"></script>
@@ -112,14 +112,14 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
     <div>
     <ul>
     <li id="agentPanel_login" style="float:right;margin-left:10px;height:20px;margin-left:5px;margin-right:5px;padding-top:2px;">
-    WorkNo<input type="text" maxlength="5" id="agentLogin_agentId" style="width:50px;border:0px;"/>
-    Password<input type="text" maxlength="20" id="agentLogin_password" style="width:100px;border:0px;"/>
-    PhoneNumber<input type="text" maxlength="24" id="agentLogin_phonenumber" style="width:50px;border:0px;"/>
-    <select id="agentLogin_loginstatus">
+    WorkNo:<input type="text" maxlength="5" id="agentLogin_agentId" style="width:50px;border:0px;"/>
+    Password:<input type="text" maxlength="20" id="agentLogin_password" style="width:100px;border:0px;"/>
+    PhoneNumber:<input type="text" maxlength="24" id="agentLogin_phonenumber" style="width:50px;border:0px;"/>
+    LoginStatus:<select id="agentLogin_loginstatus">
 	    <option value="4">Idle</option>
 	    <option value="5">ACW</option>
 	</select>
-    <select id="agentLogin_releasePhone">
+    AlwaysOffHook:<select id="agentLogin_releasePhone">
         <option value="false">No</option>
         <option value="true">Yes</option>
     </select>
@@ -211,7 +211,7 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 </div>
 
 <!--add for detail panel -->
-<div id="agent_DetailPanel" style="padding: 2px; border: 1px solid currentColor; top: 100px; width: 500px; height: 400px; right: 100px; float: right; position: absolute; z-index: 100; background-color: rgb(255, 255, 255);border-color:#DDD;">
+<div id="agent_DetailPanel" style="padding: 8px; border: 1px solid currentColor; top: 100px; width: 500px; height: 400px; right: 100px; float: right; position: absolute; z-index: 100; background-color: rgb(255, 255, 255);border-color:#DDD;">
     <div>Agent Status Button</div>
 	<div>
 		<input type="button" id="agentStatus_InWork" value="InWrok" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toWork()"/>
