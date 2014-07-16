@@ -35,3 +35,9 @@
     width:auto;
     border:0px;
 }
+
+#agentPanel_buttonlist li span {
+    height:28px;
+    cursor:pointer;
+    padding:2px;
+}

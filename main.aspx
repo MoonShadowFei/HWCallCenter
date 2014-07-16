@@ -145,7 +145,7 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 
 <tr>
 <td><div>
-<ul>
+<ul id="agentPanel_buttonlist">
 <li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;">
 <span id="agentLogin_logout" onclick="agentLogin_doLogout()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
 <img src="/_imgs/logout.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
