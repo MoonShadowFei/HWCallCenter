@@ -115,11 +115,11 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
     WorkNo:<input type="text" maxlength="5" id="agentLogin_agentId" style="width:50px;border:0px;"/>
     Password:<input type="text" maxlength="20" id="agentLogin_password" style="width:100px;border:0px;"/>
     PhoneNumber:<input type="text" maxlength="24" id="agentLogin_phonenumber" style="width:50px;border:0px;"/>
-    LoginStatus:<select id="agentLogin_loginstatus">
+    LoginStatus:<select id="agentLogin_loginstatus" style="border:0px;">
 	    <option value="4">Idle</option>
 	    <option value="5">ACW</option>
 	</select>
-    AlwaysOffHook:<select id="agentLogin_releasePhone">
+    AlwaysOffHook:<select id="agentLogin_releasePhone" style="border:0px;">
         <option value="false">No</option>
         <option value="true">Yes</option>
     </select>
