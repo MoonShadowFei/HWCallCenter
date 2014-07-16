@@ -34,10 +34,29 @@
 #agent_DetailPanel div input {
     width:auto;
     border:0px;
+    cursor:pointer;
+
+}
+
+#agent_DetailPanel div {
+    font-family:Microsoft YaHei,SimSun,Tahoma,Arial;
+    color:#444444;
 }
 
 #agentPanel_buttonlist li span {
     height:28px;
     cursor:pointer;
     padding:2px;
+    font-family:Microsoft YaHei,SimSun,Tahoma,Arial;
+    color:#444444;
+}
+
+#agentPanel_login {
+    font-family:Microsoft YaHei,SimSun,Tahoma,Arial;
+    color:#444444;
+}
+
+#agentPanel_status{
+    font-family:Microsoft YaHei,SimSun,Tahoma,Arial;
+    color:#444444;
 }

@@ -47,9 +47,9 @@
     }
     function agentPanel_showDetailPanel() {
         if ($("#agent_DetailPanel").is(":hidden")) {
-            $("#agent_DetailPanel").show();
+            $("#agent_DetailPanel").slideDown("slow");
         } else {
-            $("#agent_DetailPanel").hide();
+            $("#agent_DetailPanel").slideUp("slow");
         }
     }
 </script>
