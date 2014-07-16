@@ -13,9 +13,9 @@
 <link rel="SHORTCUT ICON" href="/favicon.ico" />
 <cnt:AppHeader id="crmHeader" runat="server" />
 <title><loc:Text ResourceId="Web.default.aspx_16" CheckForLive="true" runat="server"/></title>
-<link href="page/style/style.css" rel="stylesheet" type="text/css" />
+<link href="/ISV/page/style/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/ISV/page/openjs/jquery-1.6.2.js"></script>
-<script type="text/javascript" src="/ISVpage/openjs/json.js"></script>
+<script type="text/javascript" src="/ISV/page/openjs/json.js"></script>
 <script type="text/javascript" src="http://192.168.1.110:80/agentgateway/resource-js"></script>
 <script type="text/javascript">
     REST.apiURL = "http://192.168.1.110:80/agentgateway/resource/";

@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 .login_fieldname{
 	float: left;
@@ -29,4 +29,9 @@
 .content_form_table .content_form_fieldname
 {
 	background-color: #D8DFEA;
+}
+
+#agent_DetailPanel div input {
+    width:auto;
+    border:0px;
 }
