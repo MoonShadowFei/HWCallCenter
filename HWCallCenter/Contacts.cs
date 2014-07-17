@@ -17,7 +17,7 @@ namespace HWCallCenter
         public DateTime CreatedOn{get;set;}
         public string Owner{get;set;}
         public EntityReference RefStudent { set; get; }
-        public string ExamNo { get; set; }
+        public string Email { get; set; }
         public string IdentNo { get; set; }
     }
 
@@ -27,8 +27,8 @@ namespace HWCallCenter
         public List<Contact> ContactsList=new List<Contact>();
         public void GetContacts(string phoneno)
         {
-            GetContactsFromEntity(phoneno, "new_midschoolstudent");
-            GetContactsFromEntity(phoneno, "new_studentfamily");
+            GetContactsFromEntity(phoneno, "account");
+            GetContactsFromEntity(phoneno, "contact");
         }
 
         private void GetContactsFromEntity(string phoneno, string entityname)
@@ -40,23 +40,21 @@ namespace HWCallCenter
             string nameatt = string.Empty;
             //该实体中记录主键ID的字段名
             string idatt = string.Empty;
-            string examatt = string.Empty;
             //记录身份证的字段名
             string identNoatt = string.Empty;
             switch (entityname)
             { 
                     //如果电话字段有多个，则以','隔开
-                case "new_midschoolstudent":
-                    phoneattname = "new_inputphone,new_mobilephone,new_homephone";
-                    nameatt = "new_name";
-                    idatt = "new_midschoolstudentid";
-                    examatt = "new_ksh";
+                case "account":
+                    phoneattname = "telephone1,new_mobilephone";
+                    nameatt = "name";
+                    idatt = "accountid";
                     identNoatt = "new_idnumber";
                     break;
-                case "new_studentfamily":
-                    phoneattname = "new_phone";
-                    nameatt = "new_name";
-                    idatt = "new_studentfamilyid";
+                case "contact":
+                    phoneattname = "telephone1";
+                    nameatt = "name";
+                    idatt = "contactid";
                     break;
 
                 default:
@@ -74,7 +72,7 @@ namespace HWCallCenter
                 query.Criteria.AddCondition(con);
             }
             query.Criteria.FilterOperator=LogicalOperator.Or;
-            query.ColumnSet = new ColumnSet("createdon", nameatt, idatt, "ownerid",examatt,identNoatt);
+            query.ColumnSet = new ColumnSet("createdon", nameatt, idatt, "ownerid",identNoatt);
             if (entityname == "new_studentfamily")
             {
                 query.ColumnSet = new ColumnSet("createdon", nameatt, idatt, "ownerid","new_midschoolstudent_new_studentfamil");
@@ -104,10 +102,7 @@ namespace HWCallCenter
                     {
                         tcontact.Name = pcontact.Attributes[nameatt].ToString();
                     }
-                    if (entityname!="new_studentfamily"&&pcontact.Contains(examatt)&&!string.IsNullOrEmpty(pcontact.Attributes[examatt].ToString()))
-                    {
-                        tcontact.ExamNo = pcontact.Attributes[examatt].ToString();
-                    }
+
                     if (entityname != "new_studentfamily" && pcontact.Contains(identNoatt) && !string.IsNullOrEmpty(pcontact.Attributes[identNoatt].ToString()))
                     {
                         tcontact.IdentNo = pcontact.Attributes[identNoatt].ToString();
