@@ -197,38 +197,7 @@
                     Width="100%"></asp:TextBox>
             </td>
          </tr>
-         <tr>
-            <td>联系结果：</td>
-            <td>
-
-                <asp:DropDownList ID="ddlresult" runat="server" AutoPostBack="True" 
-                    onselectedindexchanged="ddlresult_SelectedIndexChanged">
-                    <asp:ListItem Value="2" Selected="True">愿意就读</asp:ListItem>
-                    <asp:ListItem Value="3">退档</asp:ListItem>
-                    <asp:ListItem Value="4">考虑</asp:ListItem>
-                    <asp:ListItem Value="5">申请恢复</asp:ListItem>
-                    <asp:ListItem Value="6">录后退档</asp:ListItem>
-                    <asp:ListItem Value="７">更改专业</asp:ListItem>
-                    <asp:ListItem Value="1">联系不上</asp:ListItem>
-                    <asp:ListItem Value="8">不原意就读</asp:ListItem>
-                </asp:DropDownList>
-
-             </td>
-             <td colspan="2"><asp:Label ID="lblreason" runat="server" Text="联系不上原因：" Visible="False"></asp:Label>
-                
-                 <asp:DropDownList ID="ddlreason" runat="server" Visible="False">
-                     <asp:ListItem Value="1">空号</asp:ListItem>
-                     <asp:ListItem Value="2">电话未通</asp:ListItem>
-                     <asp:ListItem Value="3">查无此人</asp:ListItem>
-                 </asp:DropDownList>
-                <asp:Label ID="lblputoutreason" runat="server" Text="退档原因：" Visible="False"></asp:Label>
-                <asp:DropDownList ID="ddlputoureason" runat="server" Visible="False">
-                     <asp:ListItem Value="100000000">学费贵</asp:ListItem>
-                     <asp:ListItem Value="100000002">复读</asp:ListItem>
-                     <asp:ListItem Value="100000003">其他</asp:ListItem>
-                 </asp:DropDownList>
-             </td>
-         </tr>
+        
          <tr>
             <td colspan='4' align='center'>
                 <asp:Button ID="btnSubmit" runat="server" Text="提交" onclick="btnSubmit_Click" />
