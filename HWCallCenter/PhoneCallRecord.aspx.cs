@@ -11,7 +11,7 @@ namespace HWCallCenter
 {
     public partial class PhoneCallRecord : System.Web.UI.Page
     {
-        public EntityReference User;
+        public EntityReference currentUser;
         protected void Page_Load(object sender, EventArgs e)
         {
             {
@@ -58,7 +58,7 @@ namespace HWCallCenter
                 IOrganizationService service = CRMService.GetUserOrganizationService();
                 WhoAmIRequest req = new WhoAmIRequest();
                 WhoAmIResponse res = (WhoAmIResponse)service.Execute(req);
-                User = service.Retrieve("systemuser", res.UserId, new Microsoft.Xrm.Sdk.Query.ColumnSet()).ToEntityReference();
+                currentUser = service.Retrieve("systemuser", res.UserId, new Microsoft.Xrm.Sdk.Query.ColumnSet()).ToEntityReference();
 
                 btnSubmit.Attributes.Add("onclick", "this.disabled=true;" + this.ClientScript.GetPostBackEventReference(btnSubmit, ""));
 
