@@ -177,9 +177,21 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 </span>
 </li>
 <li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;border:1px;">
+<span id="agentCall_hangup" onclick="agentCallOperation_toHangUp()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
+<img src="/_imgs/hangup.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
+<span >Hangup</span>
+</span>
+</li>
+<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;border:1px;">
+<span id="agentCall_answer" onclick="agentCallOperation_toAnswer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
+<img src="/_imgs/answer.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
+<span >Answer</span>
+</span>
+</li>
+<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;border:1px;">
 <span id="agentLogin_login" onclick="agentLogin_doLogin()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
 <img src="/_imgs/logon.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
-<span style="font-family:Microsoft YaHei,SimSun,Tahoma,Arial;color:#444444;">Login</span>
+<span >Login</span>
 </span>
 </li>
 <li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;border:1px;">

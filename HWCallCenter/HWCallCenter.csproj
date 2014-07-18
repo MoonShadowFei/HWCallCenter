@@ -73,6 +73,8 @@
   <ItemGroup>
     <Content Include="PhoneCallRecord.aspx" />
     <Content Include="Web.config" />
+    <Content Include="_imgs\cmd_add.png" />
+    <Content Include="_imgs\refresh16.gif" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
