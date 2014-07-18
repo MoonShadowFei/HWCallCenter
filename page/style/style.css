@@ -14,6 +14,7 @@
 .content_form_table
 {
 	border:1px solid #9db3c5;
+    padding-top:10px;
 }
 .content_form_table td
 {
@@ -23,12 +24,12 @@
 
 .content_form_table thead td
 {
-	background-color: #D8DFEA;
+	background-color: #d1d1d1;
 }
 
 .content_form_table .content_form_fieldname
 {
-	background-color: #D8DFEA;
+	background-color: #d1d1d1;
 }
 
 #agent_DetailPanel div input {

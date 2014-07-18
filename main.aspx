@@ -234,6 +234,21 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 		<input type="button" id="agentStatus_sayIdle" value="Idle" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toIdle()"/>
 	</div>
 
+    <div>
+	<table cellpadding="1" cellspacing="0" class="content_form_table">
+		<tr>
+			<td class="content_form_fieldname">Is Auto Answer</td>
+			<td><input type="radio" value="0" name="agentSetting_autoAnswer" checked="checked" /><label>Yes</label><input type="radio" value="1" name="agentSetting_autoAnswer"/><label>No</label></td>
+			<td><input type="button" value="submit" onclick="agentCallOperation_toSetAutoAnswer()"/></td>
+		</tr>
+		<tr>
+			<td class="content_form_fieldname">Is Into ACW After Hangup</td>
+			<td><input type="radio" value="0" name="agentSetting_intoACW"/><label>Yes</label><input type="radio" value="1" name="agentSetting_intoACW" checked="checked"/><label>No</label></td>
+			<td><input type="button" value="submit" onclick="agentCallOperation_toSetIntoAcw()"/></td>
+		</tr>
+	</table>
+</div>
+
 </div>
 
 <div>
