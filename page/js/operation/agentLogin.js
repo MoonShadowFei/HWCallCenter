@@ -64,7 +64,7 @@ function agentLogin_login(agentId, password, phoneNumber, status, releasePhone)
 						agentLogin_doForceLogin(agentId, password, phoneNumber, status, releasePhone);
 					}
 					break;
-				default :¡¤
+				default :
 					alert("Error! Retcode : " + retCodeLogin + ". RetMessage:" +  resLogin.message);
 				break;
 			 }
@@ -152,11 +152,9 @@ function agentLogin_doLogout()
 	if (global_agentInfo == null
 			|| global_agentInfo.undfined)
 	{
-		window.location.href = "index.html";
 		return;
 	}
 	agentLogin_lagout();
-	window.location.href = "index.html";
 }
 
 /**
