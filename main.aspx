@@ -146,59 +146,60 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 <tr>
 <td><div>
 <ul id="agentPanel_buttonlist">
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;">
+<li>
+<span id="agentButton_detailpanel" onclick="agentPanel_showDetailPanel()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
+<img src="/_imgs/arrow_down.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
+</span>
+</li>
+<li>
 <span id="agentLogin_logout" onclick="agentLogin_doLogout()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
 <img src="/_imgs/logout.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
 <span >Logout</span>
 </span>
 </li>
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;">
+<li>
 <span id="agentCall_unHold" onclick="agentCallOperation_showUnHold()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
 <img src="/_imgs/unhold.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
 <span >Unhold</span>
 </span>
 </li>
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;">
+<li>
 <span id="agentCall_transfer" onclick="agentCallOperation_showTransfer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
 <img src="/_imgs/transfer.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
 <span >Transfer</span>
 </span>
 </li>
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;" >
+<li >
 <span id="agentCall_hold" onclick="agentCallOperation_toHold()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  >
 <img src="/_imgs/hold.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
 <span >Hold</span>
 </span>
 </li>
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;">
+<li >
 <span id="agentCall_callout" onclick="agentCallOperation_showCallOut()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  >
 <img src="/_imgs/callout.jpg" alt="Callout" title="点击打开拨号盘外拨电话" style="width:18px;" />
 <span >Callout</span>
 </span>
 </li>
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;border:1px;">
+<li>
 <span id="agentCall_hangup" onclick="agentCallOperation_toHangUp()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
 <img src="/_imgs/hangup.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
 <span >Hangup</span>
 </span>
 </li>
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;border:1px;">
+<li>
 <span id="agentCall_answer" onclick="agentCallOperation_toAnswer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
 <img src="/_imgs/answer.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
 <span >Answer</span>
 </span>
 </li>
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;border:1px;">
+<li>
 <span id="agentLogin_login" onclick="agentLogin_doLogin()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
 <img src="/_imgs/logon.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
 <span >Login</span>
 </span>
 </li>
-<li style="float:right;margin-left:10px;height:28px;margin-left:5px;margin-right:5px;border:1px;">
-<span id="agentButton_detailpanel" onclick="agentPanel_showDetailPanel()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
-<img src="/_imgs/arrow_down.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
-</span>
-</li>
+
 </ul>
 </div></td>
 </tr>

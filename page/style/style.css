@@ -44,6 +44,14 @@
     color:#444444;
 }
 
+#agentPanel_buttonlist li {
+    float:right;
+    margin-right:2px;
+    margin-left:2px;
+    height:28px;
+    border:1px;
+}
+
 #agentPanel_buttonlist li span {
     height:28px;
     cursor:pointer;
