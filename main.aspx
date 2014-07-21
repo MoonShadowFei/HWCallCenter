@@ -49,7 +49,7 @@
         if ($("#agent_DetailPanel").is(":hidden")) {
             $("#agent_DetailPanel").slideDown("slow");
         } else {
-            $("#agent_DetailPanel").slideUp("slow");
+            $("#agent_DetailPanel").slideUp("normal");
         }
     }
 </script>
@@ -224,7 +224,7 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 </div>
 
 <!--add for detail panel -->
-<div id="agent_DetailPanel" style="padding: 8px; border: 1px solid currentColor; top: 100px; width: 500px; height: 400px; right: 100px; float: right; position: absolute; z-index: 100; background-color: rgb(255, 255, 255);border-color:#DDD;">
+<div id="agent_DetailPanel" style="padding: 8px; border: 1px solid currentColor; top: 100px; width: 500px; height: 400px; right: 100px; float: right; position: absolute; z-index: 100; background-color: rgb(255, 255, 255);border-color:#DDD;display:none;">
     <div>Agent Status Button</div>
 	<div>
 		<input type="button" id="agentStatus_InWork" value="InWrok" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toWork()"/>

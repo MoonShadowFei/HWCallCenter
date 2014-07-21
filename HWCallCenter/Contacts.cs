@@ -49,12 +49,13 @@ namespace HWCallCenter
                     phoneattname = "telephone1,new_mobilephone";
                     nameatt = "name";
                     idatt = "accountid";
-                    identNoatt = "new_idnumber";
+                    identNoatt = "new_passport";
                     break;
                 case "contact":
-                    phoneattname = "telephone1";
+                    phoneattname = "telephone1,mobilephone";
                     nameatt = "name";
                     idatt = "contactid";
+                    identNoatt = "new_passport";
                     break;
 
                 default:
@@ -86,13 +87,13 @@ namespace HWCallCenter
                 foreach (var pcontact in pcontacts.Entities)
                 {
                     Contact tcontact = new Contact();
-                    if (entityname == "new_midschoolstudent")
+                    if (entityname == "account")
                     {
-                        tcontact.EntityTypeName = "中学生源";
+                        tcontact.EntityTypeName = "Accounts";
                     }
-                    else if (entityname == "new_studentfamily")
+                    else if (entityname == "contact")
                     {
-                        tcontact.EntityTypeName = "家庭联系人（中学生源）";
+                        tcontact.EntityTypeName = "Contacts";
                     }
                     tcontact.Id = (Guid)pcontact.Attributes[idatt];
                     tcontact.EntityType = entityname;
