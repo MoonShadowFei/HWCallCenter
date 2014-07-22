@@ -61,13 +61,14 @@ function agentCallInfo_updateCallStatus(callStatus)
 
 function agentCallInfo_showCallInfo(callId, callStatus)
 {
+
 	var callInfo = global_allCallInfo.get(global_currentDealCallId);
 	var callFeature = CALL_FEATURE.OTHER;
 	var otherParty = callInfo.caller;
 	if (callInfo.feature != undefined
 			&& callInfo.feature != null)
 	{
-		callFeature = parseInt(event.content.feature);
+	    callFeature = parseInt(callInfo.callfeature);
 	}
 	switch (callFeature) {
 		case CALL_FEATURE.FEATURE_OUT:

@@ -227,7 +227,7 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 <div id="agent_DetailPanel" style="padding: 8px; border: 1px solid currentColor; top: 100px; width: 500px; height: 400px; right: 100px; float: right; position: absolute; z-index: 100; background-color: rgb(255, 255, 255);border-color:#DDD;display:none;">
     <div>Agent Status Button</div>
 	<div>
-		<input type="button" id="agentStatus_InWork" value="InWrok" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toWork()"/>
+		<input type="button" id="agentStatus_InWork" value="InWork" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toWork()"/>
 		<input type="button" id="agentStatus_ExitWork" value="ExitWork" disabled="disabled" onclick="agentStatusOperation_toExitWork()"/>
 		<input type="button" id="agentStatus_rest" value="Rest" disabled="disabled" onclick="agentStatusOperation_showRestWindow()"/>
 		<input type="button" id="agentStatus_cancelRest" value="CancelRest" style="display: none;" disabled="disabled" onclick="agentStatusOperation_toCancelRest()"/>
