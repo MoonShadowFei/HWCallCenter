@@ -56,8 +56,8 @@
     //callerid: 来电号码
     //direct: 来电方向
     // 如果联系人在系统中不存在，则创建联系人,并打开联系人; 存在，则直接打开
-    function OpenNewScreen(callerid, feature, uniqueid) {
-        var org = "wicresoft";
+    function openNewPopupScreen(callerid, feature, uniqueid) {
+        var org = Xrm.Page.context.getOrgUniqueName();
         var strUrl = document.location.protocol + "//" + document.location.host + "/" + org;
 
         //------------------------------ 打开电话联络窗口开始-----------------------------------
@@ -164,54 +164,54 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 <ul id="agentPanel_buttonlist">
 <li>
 <span id="agentButton_detailpanel" onclick="agentPanel_showDetailPanel()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
-<img src="/_imgs/arrow_down.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
+<img src="/_imgs/arrow_down.jpg" alt="Login" title="" style="width:18px"  />
 </span>
 </li>
 <li>
 <span id="agentLogin_logout" onclick="agentLogin_doLogout()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
-<img src="/_imgs/logout.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
+<img src="/_imgs/logout.jpg" alt="外呼" title="" style="width:18px;" />
 <span >Logout</span>
 </span>
 </li>
 <li>
 <span id="agentCall_unHold" onclick="agentCallOperation_showUnHold()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
-<img src="/_imgs/unhold.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
+<img src="/_imgs/unhold.jpg" alt="外呼" title="" style="width:18px;" />
 <span >Unhold</span>
 </span>
 </li>
 <li>
 <span id="agentCall_transfer" onclick="agentCallOperation_showTransfer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
-<img src="/_imgs/transfer.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
+<img src="/_imgs/transfer.jpg" alt="外呼" title="" style="width:18px;" />
 <span >Transfer</span>
 </span>
 </li>
 <li >
 <span id="agentCall_hold" onclick="agentCallOperation_toHold()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  >
-<img src="/_imgs/hold.jpg" alt="外呼" title="点击打开拨号盘外拨电话" style="width:18px;" />
+<img src="/_imgs/hold.jpg" alt="外呼" title="" style="width:18px;" />
 <span >Hold</span>
 </span>
 </li>
 <li >
 <span id="agentCall_callout" onclick="agentCallOperation_showCallOut()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  >
-<img src="/_imgs/callout.jpg" alt="Callout" title="点击打开拨号盘外拨电话" style="width:18px;" />
+<img src="/_imgs/callout.jpg" alt="Callout" title="" style="width:18px;" />
 <span >Callout</span>
 </span>
 </li>
 <li>
 <span id="agentCall_hangup" onclick="agentCallOperation_toHangUp()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
-<img src="/_imgs/hangup.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
+<img src="/_imgs/hangup.jpg" alt="Login" title="" style="width:18px"  />
 <span >Hangup</span>
 </span>
 </li>
 <li>
 <span id="agentCall_answer" onclick="agentCallOperation_toAnswer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
-<img src="/_imgs/answer.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
+<img src="/_imgs/answer.jpg" alt="Login" title="" style="width:18px"  />
 <span >Answer</span>
 </span>
 </li>
 <li>
 <span id="agentLogin_login" onclick="agentLogin_doLogin()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
-<img src="/_imgs/logon.jpg" alt="Login" title="点击打开拨号盘外拨电话" style="width:18px"  />
+<img src="/_imgs/logon.jpg" alt="Login" title="" style="width:18px"  />
 <span >Login</span>
 </span>
 </li>

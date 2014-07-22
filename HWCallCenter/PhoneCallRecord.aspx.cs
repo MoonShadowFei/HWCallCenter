@@ -34,8 +34,6 @@ namespace HWCallCenter
 
                 lbldirect.Text = "呼入";
                 lblphoneno.Text = "13475657443";
-                lblareano.Text = "0731";
-                lbldistrict.Text = "湖南长沙";
                 //Contacts cons = new Contacts();
                 //lblphoneno.Text = phoneno;
                 //cons.GetContacts(phoneno);
@@ -74,17 +72,14 @@ namespace HWCallCenter
                     {
                         Entity phonecall = new Entity("phonecall");
                         //将致电人赋值
-                        if (selectedcontact.EntityType == "new_midschoolstudent")
-                        {
-                            phonecall.Attributes["new_midschoolstudent"] = new EntityReference("new_midschoolstudent", selectedcontact.Id);
-                            phonecall.Attributes["regardingobjectid"] = new EntityReference("new_midschoolstudent", selectedcontact.Id); ;
-                        }
-                        else if (selectedcontact.EntityType == "new_studentfamily")
-                        {
-                            phonecall.Attributes["new_stufamily"] = new EntityReference("new_studentfamily", selectedcontact.Id);
-                            phonecall.Attributes["new_midschoolstudent"] = selectedcontact.RefStudent;
-                            phonecall.Attributes["regardingobjectid"] = selectedcontact.RefStudent;
-                        }
+                        EntityReference from = new EntityReference(selectedcontact.EntityType, selectedcontact.Id);
+                        //将致电人添加到partyList里
+                        Entity fromParty = new Entity("activityparty");
+                        fromParty.Attributes.Add("partyid",from);
+                        EntityCollection collFromParty = new EntityCollection();
+                        collFromParty.EntityName = selectedcontact.EntityType;
+                        collFromParty.Entities.Add(fromParty);
+                        phonecall.Attributes["from"] = collFromParty;
 
                         //将接听人添加到partyList里
                         EntityReference to = currentUser;
@@ -99,14 +94,14 @@ namespace HWCallCenter
                         phonecall.Attributes["phonenumber"] = lblphoneno.Text;
                         phonecall.Attributes["description"] = tbDescription.Text;
                         //拨入0，拨出1
-                        if (lbldirect.Text == "拨入")
-                        {
-                            phonecall.Attributes["directioncode"] = false;
-                        }
-                        else if (lbldirect.Text == "拨出")
-                        {
-                            phonecall.Attributes["directioncode"] = true;
-                        }
+                        //if (lbldirect.Text == "拨入")
+                        //{
+                        //    phonecall.Attributes["directioncode"] = false;
+                        //}
+                        //else if (lbldirect.Text == "拨出")
+                        //{
+                        //    phonecall.Attributes["directioncode"] = true;
+                        //}
 
                         IOrganizationService service = CRMService.GetUserOrganizationService();
                         Guid phonecallId = service.Create(phonecall);
