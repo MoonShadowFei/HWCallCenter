@@ -141,23 +141,17 @@
     <div >
     <table style="width:800px;border:1px solid #696969;" align="center">
         <tr>
-            <td class="style1">来电号码：</td><td class="style2">
+            <td class="style1">PhoneNumber：</td><td class="style2">
                             <asp:Label ID="lblphoneno" runat="server" Text=""></asp:Label></td>
-            <td class="style1">通话编号：</td><td class="style2">
+            <td class="style1">RecordID：</td><td class="style2">
                             <asp:Label ID="lblrecordno" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
-            <td class="style1">方向：</td><td class="style2">
+            <td class="style1">Feature：</td><td class="style2">
                             <asp:Label ID="lbldirect" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
-            <td class="style1">区号：</td><td class="style2">
-                            <asp:Label ID="lblareano" runat="server" Text=""></asp:Label></td>
-            <td class="style1">归属地：</td><td class="style2">
-                            <asp:Label ID="lbldistrict" runat="server" Text=""></asp:Label></td>
-        </tr>
-        <tr>
-            <td style="width:150px">选择联系人：</td>
+            <td style="width:150px">Select a contact：</td>
             <td colspan='3'  align=left >
                 <div id='divTable'>
                 <asp:GridView ID="gvContacts" runat="server" 
@@ -170,11 +164,11 @@
                                 <asp:CheckBox ID="CheckBox1" runat="server" onclick="javascript:ChangeChk(this)"    />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Name" HeaderText="姓名" />
-                        <asp:BoundField DataField="IdentNo" HeaderText="身份证号" />
-                        <asp:BoundField DataField="EntityTypeName" HeaderText="类型" />
-                        <asp:BoundField DataField="Owner" HeaderText="负责人" />
-                        <asp:BoundField DataField="CreatedOn" HeaderText="创建时间" />
+                        <asp:BoundField DataField="Name" HeaderText="Name" />
+                        <asp:BoundField DataField="IdentNo" HeaderText="IDNumber" />
+                        <asp:BoundField DataField="EntityTypeName" HeaderText="EntityType" />
+                        <asp:BoundField DataField="Owner" HeaderText="RecoredOwner" />
+                        <asp:BoundField DataField="CreatedOn" HeaderText="CreatedOn" />
                     </Columns>
                 </asp:GridView>
                 </div>
@@ -191,7 +185,7 @@
             </td>
          </tr>
          <tr>
-            <td>沟通纪要：</td>
+            <td>Description：</td>
             <td colspan='3'>
                 <asp:TextBox ID="tbDescription" runat="server" Rows="5" TextMode="MultiLine" 
                     Width="100%"></asp:TextBox>
@@ -200,7 +194,7 @@
         
          <tr>
             <td colspan='4' align='center'>
-                <asp:Button ID="btnSubmit" runat="server" Text="提交" onclick="btnSubmit_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="Submit" onclick="btnSubmit_Click" />
             </td>
          </tr>
     </table>       

@@ -16,18 +16,11 @@ namespace HWCallCenter
         {
             {
                 string phoneno = string.Empty;
-                if (!string.IsNullOrEmpty(Request.QueryString["direct"]))
+                if (!string.IsNullOrEmpty(Request.QueryString["feature"]))
                 {
-                    string direct = Request.QueryString["direct"];
-                    if (direct.ToLower() == "in")
-                    {
-                        lbldirect.Text = "拨入";
-                    }
-                    if (direct.ToLower() == "out")
-                    {
-                        lbldirect.Text = "拨出";
-                    }
+                    string direct = Request.QueryString["feature"];
 
+                    lbldirect.Text = direct;
                 }
                 if (!string.IsNullOrEmpty(Request.QueryString["phoneno"]))
                 {
@@ -38,14 +31,7 @@ namespace HWCallCenter
                 {
                     lblrecordno.Text = Request.QueryString["uniqueid"];
                 }
-                if (!string.IsNullOrEmpty(Request.QueryString["area"]))
-                {
-                    lblareano.Text = Request.QueryString["area"];
-                }
-                if (!string.IsNullOrEmpty(Request.QueryString["city"]) && !string.IsNullOrEmpty(Request.QueryString["province"]))
-                {
-                    lbldistrict.Text = Request.QueryString["province"] + Request.QueryString["city"];
-                }
+
                 lbldirect.Text = "呼入";
                 lblphoneno.Text = "13475657443";
                 lblareano.Text = "0731";

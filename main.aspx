@@ -52,6 +52,22 @@
             $("#agent_DetailPanel").slideUp("normal");
         }
     }
+    //打开新的页面
+    //callerid: 来电号码
+    //direct: 来电方向
+    // 如果联系人在系统中不存在，则创建联系人,并打开联系人; 存在，则直接打开
+    function OpenNewScreen(callerid, feature, uniqueid) {
+        var org = "wicresoft";
+        var strUrl = document.location.protocol + "//" + document.location.host + "/" + org;
+
+        //------------------------------ 打开电话联络窗口开始-----------------------------------
+        var extraqs = "phoneno=" + callerid + "&feature=" + feature + "&uniqueid=" + uniqueid;
+        strNewUrl = strUrl + "/ISV/PhoneCallRecord.aspx?" + extraqs;
+        var top = (window.screen.availHeight - 400) / 2;
+        var left = (window.screen.availWidth - 800) / 2;
+        window.open(strNewUrl, "", 'width=800,height=400,top=60,left=60,toolbar=no,resizable=yes,menubar=no,status=no,location=no,scrollbar=yes');
+        //------------------------------- 打开电话联络窗口结束-----------------------------------
+    }
 </script>
 </head>
 <noscript>
@@ -248,7 +264,31 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 			<td><input type="button" value="submit" onclick="agentCallOperation_toSetIntoAcw()"/></td>
 		</tr>
 	</table>
-</div>
+    </div>
+
+    <div>
+	<div>Agent Console</div>
+	<div><input type="button" value="Clean Log" onclick="agentConsole_cleanLog()" style="border:0px;"></div>
+	<div style="height: 300px;overflow-y: auto;overflow-x:hidden;">
+		<table id="agentConsole" cellpadding="1" cellspacing="0" class="content_form_table" style="width: 100%">
+			<colgroup>
+				<col width="150px"/>
+			</colgroup>
+        	<thead>
+            	<tr>
+                	<td>
+                      	Date
+                    </td>
+                    <td>
+                      	Message
+                    </td>
+                </tr>
+            </thead>
+			<tbody>
+            </tbody>
+		</table>
+	</div>
+    </div>
 
 </div>
 
