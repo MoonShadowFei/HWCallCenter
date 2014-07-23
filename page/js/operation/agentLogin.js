@@ -166,21 +166,20 @@ function agentLogin_lagout()
     OnlineAgent.logout({
         "agentid": global_agentInfo.agentId,
         $callback: function(result,data, entity){
-        var resLogout = entity;
-        var retCodeLogout = resLogout.retcode;
-        switch (retCodeLogout)
-        {
-            case "0":
-                agentConsole_debug("agent [" + agentId + "] logout successfully.");
-                $("#agentPanel_status").hide();
-                $("#agentPanel_login").show();
-                // reset skill successfully	
-                setTimeout("getEventLisnter()", 500);
-                break;
-            default :
-                alert("Error! Retcode : " + retCodeLogin + ". RetMessage:" +  resLogin.message);
-                break;
-        }
+            var resLogout = entity;
+            var retCodeLogout = resLogout.retcode;
+            switch (retCodeLogout) {
+                case "0":
+                    agentConsole_debug("agent [" + agentId + "] logout successfully.");
+                    $("#agentPanel_status").hide();
+                    $("#agentPanel_login").show();
+                    // reset skill successfully	
+                    setTimeout("getEventLisnter()", 500);
+                    break;
+                default:
+                    alert("Error! Retcode : " + retCodeLogout + ". RetMessage:" + resLogout.message);
+                    break;
+            }
         }    
     });
 }
