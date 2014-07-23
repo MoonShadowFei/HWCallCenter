@@ -117,8 +117,7 @@ function agentLogin_doForceLogin(agentId, password, phoneNumber, status, release
 function agentLogin_loginSuccess(agentId, phoneNumber)
 {
     $("#agentLogin_login").attr("disabled", "disabled");
-    $("#agentPanel_login").hide();
-    $("#agentPanel_status").show();
+
 	$("#agentLogin_logout").removeAttr("disabled");
 	global_agentInfo = new AgentInfo(agentId, phoneNumber);
 	OnlineAgent.resetSkill({
@@ -130,7 +129,9 @@ function agentLogin_loginSuccess(agentId, phoneNumber)
 			 switch (retCodeLogin)
 			 {
 				case "0":
-					agentConsole_debug("agent [" + agentId + "] login successfully.");
+				    agentConsole_debug("agent [" + agentId + "] login successfully.");
+				    $("#agentPanel_login").hide();
+				    $("#agentPanel_status").show();
 					// reset skill successfully	
 					setTimeout("getEventLisnter()", 500);
 					break;
@@ -162,5 +163,24 @@ function agentLogin_doLogout()
  */
 function agentLogin_lagout()
 {
-	OnlineAgent.logout({"agentid" : global_agentInfo.agentId});
+    OnlineAgent.logout({
+        "agentid": global_agentInfo.agentId,
+        $callback: function(result,data, entity){
+        var resLogout = entity;
+        var retCodeLogout = resLogout.retcode;
+        switch (retCodeLogout)
+        {
+            case "0":
+                agentConsole_debug("agent [" + agentId + "] logout successfully.");
+                $("#agentPanel_status").hide();
+                $("#agentPanel_login").show();
+                // reset skill successfully	
+                setTimeout("getEventLisnter()", 500);
+                break;
+            default :
+                alert("Error! Retcode : " + retCodeLogin + ". RetMessage:" +  resLogin.message);
+                break;
+        }
+        }    
+    });
 }

@@ -101,6 +101,7 @@ namespace HWCallCenter
                         //else if (lbldirect.Text == "拨出")
                         //{
                         //    phonecall.Attributes["directioncode"] = true;
+
                         //}
 
                         IOrganizationService service = CRMService.GetUserOrganizationService();
