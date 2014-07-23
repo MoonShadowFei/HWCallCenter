@@ -2,7 +2,7 @@
 //callerid: 来电号码
 //direct: 来电方向
 //如果联系人在系统中不存在，则创建联系人,并打开联系人; 存在，则直接打开
-function openNewPopupScreen(callerid, feature, uniqueid) {
+function crmForm_openNewPopupScreen(callerid, feature, uniqueid) {
     var org = Xrm.Page.context.getOrgUniqueName();
     var strUrl = document.location.protocol + "//" + document.location.host + "/" + org;
 

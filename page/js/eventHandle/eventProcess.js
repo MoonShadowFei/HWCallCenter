@@ -110,7 +110,7 @@ function Proc_agentEvent_customerAlerting(event)
 	{
 		//Agent do callout and the customer phone is ringing.
 	    agentCallInfo_showCurrentCallInfo(otherParty, CALL_STATUS.ALERTING, CALL_FEATURE.FEATURE_OUT);
-	    openNewPopupScreen(event.content.otherPhone,event.content.feature,event.content.callid);
+	    crmForm_openNewPopupScreen(event.content.otherPhone, event.content.feature, event.content.callid);
 		return;
 	}
 	if (global_currentInnercallCallId == callId)

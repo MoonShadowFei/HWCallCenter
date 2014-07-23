@@ -29,7 +29,6 @@
 <script type="text/javascript" src="/ISV/page/js/common/resultCode.js"></script>
 <script type="text/javascript" src="/ISV/page/js/common/globalVariable.js"></script>
 <script type="text/javascript" src="/ISV/page/js/common/agentConsole.js"></script>
-<script type="text/javascript" src="/ISV/page/js/common/crm2cc.js"></script>
 <script type="text/javascript" src="/ISV/page/js/eventHandle/eventHandle.js"></script>
 <script type="text/javascript" src="/ISV/page/js/eventHandle/eventProcess.js"></script>
 <script type="text/javascript" src="/ISV/page/js/eventHandle/agentStatus.js"></script>
@@ -37,6 +36,8 @@
 <script type="text/javascript" src="/ISV/page/js/operation/agentStatusOperation.js"></script>
 <script type="text/javascript" src="/ISV/page/js/operation/agentCallOperation.js"></script>
 <script type="text/javascript" src="/ISV/page/js/operation/agentCallInfo.js"></script>
+<script type="text/javascript" src="/ISV/page/js/CRMOperation/formStatus.js"></script>
+<script type="text/javascript" src="/ISV/page/js/CRMOperation/dataRelated.js"></script>
 
 <script type="text/javascript">
     function mouseover(btn) {
