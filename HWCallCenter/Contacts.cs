@@ -53,7 +53,7 @@ namespace HWCallCenter
                     break;
                 case "contact":
                     phoneattname = "telephone1,mobilephone";
-                    nameatt = "name";
+                    nameatt = "fullname";
                     idatt = "contactid";
                     identNoatt = "new_passport";
                     break;

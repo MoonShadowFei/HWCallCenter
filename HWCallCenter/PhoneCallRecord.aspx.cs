@@ -32,13 +32,13 @@ namespace HWCallCenter
                     lblrecordno.Text = Request.QueryString["uniqueid"];
                 }
 
-                lbldirect.Text = "呼入";
-                lblphoneno.Text = "13475657443";
-                //Contacts cons = new Contacts();
-                //lblphoneno.Text = phoneno;
-                //cons.GetContacts(phoneno);
-                //gvContacts.DataSource = cons.ContactsList;
-                //gvContacts.DataBind();
+                //lbldirect.Text = "呼入";
+                //lblphoneno.Text = "13475657443";
+                Contacts cons = new Contacts();
+                lblphoneno.Text = phoneno;
+                cons.GetContacts(phoneno);
+                gvContacts.DataSource = cons.ContactsList;
+                gvContacts.DataBind();
                 IOrganizationService service = CRMService.GetUserOrganizationService();
                 WhoAmIRequest req = new WhoAmIRequest();
                 WhoAmIResponse res = (WhoAmIResponse)service.Execute(req);
@@ -119,6 +119,41 @@ namespace HWCallCenter
                     Response.Write("<script type='text/javascript'>alert('请选择联系人或者点击 + 按钮添加新联系人')</script>");
                 }
             }
+        }
+
+        protected void gvContacts_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+
+        }
+
+        protected void gvContacts_RowDataBound1(object sender, GridViewRowEventArgs e)
+        {
+
+        }
+
+        protected void gvContacts_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
+
+        protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+        {
+            string phoneno = string.Empty;
+            if (!string.IsNullOrEmpty(Request.QueryString["phoneno"]))
+            {
+                phoneno = Request.QueryString["phoneno"];
+
+            }
+            Contacts cons = new Contacts();
+            lblphoneno.Text = phoneno;
+            cons.GetContacts(phoneno);
+            gvContacts.DataSource = cons.ContactsList;
+            gvContacts.DataBind();
         }
     }
 }

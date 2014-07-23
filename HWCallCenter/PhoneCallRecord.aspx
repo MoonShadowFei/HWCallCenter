@@ -179,7 +179,7 @@
             <td>
             </td>
             <td>
-                <asp:ImageButton ID="ImageButton1" runat="server" OnClientClick="javascript:OpenCreateStudent()" ImageUrl="/_imgs/cmd_add.png"/>
+                <asp:ImageButton ID="ImageButton1" runat="server" OnClientClick="javascript:OpenCreateStudent()" ImageUrl="/_imgs/cmd_add.png" OnClick="ImageButton1_Click" style="width: 16px"/>
                 <asp:ImageButton ID="ImageButton2" runat="server"  
                     ImageUrl="/_imgs/refresh16.gif" onclick="ImageButton2_Click"/>
             </td>
