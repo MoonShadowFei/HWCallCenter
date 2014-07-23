@@ -90,9 +90,10 @@ namespace HWCallCenter
                         collToParty.Entities.Add(toParty);
                         phonecall.Attributes["to"] = collToParty;
 
-                        phonecall.Attributes["new_thbh"] = lblrecordno.Text;
+                        phonecall.Attributes["new_ccrecordno"] = lblrecordno.Text;
                         phonecall.Attributes["phonenumber"] = lblphoneno.Text;
                         phonecall.Attributes["description"] = tbDescription.Text;
+                        phonecall.Attributes["subject"] = "From CC:" + lblphoneno.Text;
                         //拨入0，拨出1
                         //if (lbldirect.Text == "拨入")
                         //{
