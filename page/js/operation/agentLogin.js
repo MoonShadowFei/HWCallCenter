@@ -170,7 +170,7 @@ function agentLogin_lagout()
             var retCodeLogout = resLogout.retcode;
             switch (retCodeLogout) {
                 case "0":
-                    agentConsole_debug("agent [" + agentId + "] logout successfully.");
+                    agentConsole_debug("agent [" + global_agentInfo.agentId + "] logout successfully.");
                     $("#agentPanel_status").hide();
                     $("#agentPanel_login").show();
                     // reset skill successfully	
