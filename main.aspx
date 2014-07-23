@@ -287,3 +287,16 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 <cnt:AppFooter id="crmFooter" runat="server"/>
 </body>
 </html>
+<script type="text/javascript">
+
+    var userID = "";
+    var agentPhone = "";
+    var agentInfo = crmData_getUserInfo(Xrm.Page.context.getUserId().toString());
+    if (agentInfo) {
+        userID = agentInfo.userID;
+        agentPhone = agentInfo.userPhone;
+        $("#agentLogin_agentId").val(userID);
+        $("#agentLogin_phonenumber").val(agentPhone);
+    }
+    
+</script>

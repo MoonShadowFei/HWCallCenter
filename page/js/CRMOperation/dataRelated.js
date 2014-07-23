@@ -1,7 +1,7 @@
 ﻿function crmData_getUserInfo(userid) {
     var staffID = '';
     var agentPhone = '';
-    var org = Xrm.Page.getOrgUniqueName();
+    var org = Xrm.Page.context.getOrgUniqueName();
     var userid = userid.replace(/{/g, '').replace(/}/g, '');
     var serverUrl = document.location.protocol + "//" + document.location.host + "/" + org;
     var remoteUrl = serverUrl + "/XRMServices/2011/OrganizationData.svc/SystemUserSet(guid'" + userid + "')";
