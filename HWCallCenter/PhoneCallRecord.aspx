@@ -130,7 +130,7 @@
             var pno = getQueryStringByName("phoneno");
             if (pno != null) {
                 var extraqs = "new_mobilephone%3D" + pno + "%26new_studentsource%3D2%26new_recuitmenttype%3D0%26new_graduateyear%3D" + new Date().getFullYear();
-                var newstrUrl = strUrl + "/main.aspx?etn=new_midschoolstudent&pagetype=entityrecord&extraqs=" + extraqs;
+                var newstrUrl = strUrl + "/main.aspx?etn=account&pagetype=entityrecord&extraqs=" + extraqs;
                 openWindow(newstrUrl);
             }
         }

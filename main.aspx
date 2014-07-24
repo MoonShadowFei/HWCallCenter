@@ -289,14 +289,26 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 </html>
 <script type="text/javascript">
 
-    var userID = "";
-    var agentPhone = "";
-    var agentInfo = crmData_getUserInfo(Xrm.Page.context.getUserId().toString());
-    if (agentInfo) {
-        userID = agentInfo.userID;
-        agentPhone = agentInfo.userPhone;
-        $("#agentLogin_agentId").val(userID);
-        $("#agentLogin_phonenumber").val(agentPhone);
+    var qs = window.location.search.substr(1);
+    var homepage = false;
+    if (qs == '') //homepage
+    {
+        homepage = true;
     }
+    if (!homepage) {
+        $("#callcenterholder").hide();
+        $("#agent_DetailPanel").hide();
+    } else {
+        var userID = "";
+        var agentPhone = "";
+        var agentInfo = crmData_getUserInfo(Xrm.Page.context.getUserId().toString());
+        if (agentInfo) {
+            userID = agentInfo.userID;
+            agentPhone = agentInfo.userPhone;
+            $("#agentLogin_agentId").val(userID);
+            $("#agentLogin_phonenumber").val(agentPhone);
+        }
+    }
+    
     
 </script>

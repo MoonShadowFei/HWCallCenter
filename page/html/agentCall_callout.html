@@ -1,16 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Call Out Window</title>
 <link   rel="stylesheet" type="text/css"  href="../style/style.css"  />
+<link   rel="stylesheet" type="text/css"  href="../style/cc.css"  />
 <script type="text/javascript" src="../openjs/jquery-1.6.2.js"></script>
 <script type="text/javascript" src="../js/common/common.js"></script>
 <script type="text/javascript">
 
 function agentCallOperation_doCallOut()
 {
-	var phoneNo = $("#agentCall_calloutWindow_called").val().trim();
+    var phoneNo = $("#txtNum").val().trim();
 	var regex = /[^\d#*]/; 	
 	if (phoneNo == "" || regex.test(phoneNo))
 	{
@@ -35,11 +36,42 @@ function closeWin()
 	window.open('','_self'); 
 	window.close(); 
 }
+
+function mouseover(btn) {
+    $(btn).css({ cursor: "hand" });
+}
+function mouseout(btn) {
+    $(btn).css({ cursor: "default" });
+}
+
+function NumClick(btn) {
+    $("#txtNum").val($("#txtNum").val() + $(btn).val());
+    $("#txtNum").focus();
+}
+function DelClick(btn) {
+    $("#txtNum").val($("#txtNum").val().substr(0, $("#txtNum").val().length - 1));
+}
+function Clearup() {
+    $("#txtNum").val('');
+}
+function FunClick() {
+    if ($("#txtNum").val() == '') {
+        alert("请输入要拨打的电话号码!");
+    }
+}
+function DialClick() {
+    if ($("#txtNum").val() == '') {
+        alert("请输入要拨出的电话号码!");
+        $("#txtNum").select();
+        return false;
+    }
+    agentCallOperation_doCallOut();
+}
 </script>
 </head>
 <body>
 <!-- Call out window begin -->
-<div id="agentCall_calloutWindow" class="window_show">
+<!--<div id="agentCall_calloutWindow" class="window_show">
 	<table width="100%" class="content_form_table" cellpadding="1" cellspacing="0" >
 		<tr>
 			<td class="content_form_fieldname">Called Number</td>
@@ -52,6 +84,69 @@ function closeWin()
 		<input type="button" value="Close" onclick="closeWin()"/>
 	</div>
 </div>
+   <!-->
+    <div id = "dialplate" style="background-color:White; position:absolute;z-index:1001;width:200px;height:250px;border:1px solid #DDD; filter: alpha(opacity=75); opacity:0.75;" >
+    <div style="width:100%;height:25px;background-color:#d1d1d1;"><span id="dialtitle" class="dialtitle"></span><img src="/_imgs/close.png" style="float:right;margin-right:5px" title="点击关闭拨号盘" alt="Close" onclick="closeWin()" onmouseover="mouseover(this)"  onmouseout="mouseout(this)"/></div>
+    <table style="width: 100%;margin-left:5px">
+        <tr>
+            <td colspan="3"><input id="txtNum" type="text" class="NumText" /></td>
+        </tr>
+        <tr>
+            <td>
+                <input id="Button1" type="button" value="1" class="NumButton" onclick="NumClick(this)" /></td>
+            <td>
+                <input id="Button2" type="button" value="2" class="NumButton" onclick="NumClick(this)"/>
+            </td>
+            <td>
+                <input id="Button3" type="button" value="3"  class="NumButton" onclick="NumClick(this)" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="Button4" type="button" value="4" class="NumButton" onclick="NumClick(this)"/></td>
+            <td>
+                <input id="Button5" type="button" value="5" class="NumButton" onclick="NumClick(this)" />
+            </td>
+            <td>
+                <input id="Button6" type="button" value="6"  class="NumButton" onclick="NumClick(this)"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="Button7" type="button" value="7" class="NumButton" onclick="NumClick(this)" /></td>
+            <td>
+                <input id="Button8" type="button" value="8" class="NumButton" onclick="NumClick(this)"/>
+            </td>
+            <td>
+                <input id="Button9" type="button" value="9"  class="NumButton" onclick="NumClick(this)"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <input id="Button11" type="button" value="*" class="NumButton" onclick="NumClick(this)"/>
+                </td>
+            <td>
+                <input id="Button10" type="button" value="0" class="NumButton" onclick="NumClick(this)"/> 
+            </td>
+            <td>
+                <input id="Button12" type="button" value="#"  class="NumButton" onclick="NumClick(this)" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <input id="Button13" type="button" value="Clear" class="FunButton" onclick="Clearup()"/>
+                </td>
+            <td>
+                <input id="Button14" type="button" value="C" class="NumButton" onclick="DelClick(this)"/> 
+            </td>
+            <td>
+                <input id="btnOk" type="button" value="Dial"  class="FunButton" onclick="DialClick()" />
+            </td>
+        </tr>
+    </table>
+</div>
+
+
 <!-- Call out window end -->
 </body>
 </html>
