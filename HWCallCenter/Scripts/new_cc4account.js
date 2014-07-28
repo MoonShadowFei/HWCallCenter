@@ -18,8 +18,8 @@
         $entity: { "called": phone }
     });
     var retResult = retJson.retcode;
-    //if (global_resultCode.SUCCESSCODE == retResult) {
-    //    global_currentCalloutNumber = phoneNo;
-    //    global_currentCalloutCallId = retJson.result;
-    //}
+    if (window.parent.global_resultCode.SUCCESSCODE == retResult) {
+        window.parent.global_currentCalloutNumber = phoneNo;
+        window.parent.global_currentCalloutCallId = retJson.result;
+    }
 }
