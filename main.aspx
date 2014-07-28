@@ -51,8 +51,10 @@
     function agentPanel_showDetailPanel() {
         if ($("#agent_DetailPanel").is(":hidden")) {
             $("#agent_DetailPanel").slideDown("slow");
+            $("#agentButton_detailpanel img").attr("src", "/_imgs/arrow_up.jpg");
         } else {
             $("#agent_DetailPanel").slideUp("normal");
+            $("#agentButton_detailpanel img").attr("src", "/_imgs/arrow_down.jpg");
         }
     }
     

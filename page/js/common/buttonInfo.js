@@ -93,7 +93,13 @@ function buttonInfo_disableButton(buttonArray)
 {
 	for (var i in buttonArray)
 	{
-		$("#" + buttonArray[i]).attr("disabled", "disabled");
+	    $("#" + buttonArray[i]).attr("disabled", "disabled");
+	    $("#" + buttonArray[i]).unbind("click");
+	    for (var j = 0; j < AGENT_BUTTON_DETAILS.length; j++) {
+	        if (buttonArray[i] == AGENT_BUTTON_DETAILS[j].name) {
+	            $("#" + buttonArray[i] + " img").attr("src", "/_imgs/" + AGENT_BUTTON_DETAILS[j].disablebg);
+	        }
+	    }
 	}
 }
 
@@ -104,7 +110,13 @@ function buttonInfo_enableButton(buttonArray)
 {
 	for (var i in buttonArray)
 	{
-		$("#" + buttonArray[i]).removeAttr("disabled");
+	    $("#" + buttonArray[i]).removeAttr("disabled");
+	    for (var j = 0; j < AGENT_BUTTON_DETAILS.length; j++) {
+	        if (buttonArray[i] == AGENT_BUTTON_DETAILS[j].name) {
+	            $("#" + buttonArray[i]).bind("click", AGENT_BUTTON_DETAILS[j].eventName);
+	            $("#" + buttonArray[i] + " img").attr("src", "/_imgs/" + AGENT_BUTTON_DETAILS[j].enabledbg);
+	        }
+	    }
 	}
 }
 
@@ -696,3 +708,14 @@ AGENT_BUTTON_STATUS.NOHOLDCALL={
 		    AGENT_VOICE_BUTTON.THREEPARTY 
 		 ]
 };
+
+AGENT_BUTTON_DETAILS = [
+    { name: AGENT_VOICE_BUTTON.ANSWER, enabledbg: "answer.jpg", disablebg: "no_answer.jpg", eventName: "agentCallOperation_toAnswer" },
+    { name: AGENT_VOICE_BUTTON.HANGUP, enabledbg: "hangup.jpg", disablebg: "no_hangup.jpg", eventName: "agentCallOperation_toHangUp" },
+    { name: AGENT_VOICE_BUTTON.HOLD, enabledbg: "hold.jpg", disablebg: "no_hold.jpg", eventName: "agentCallOperation_toHold" },
+    { name: AGENT_VOICE_BUTTON.UNHOLD, enabledbg: "unhold.jpg", disablebg: "no_unhold.jpg", eventName: "agentCallOperation_showUnHold" },
+    { name: AGENT_VOICE_BUTTON.THREEPARTY, enabledbg: "conference.jpg", disablebg: "no_conference.jpg", eventName: "" },
+    { name: AGENT_VOICE_BUTTON.TRANSFER, enabledbg: "transfer.jpg", disablebg: "no_transfer.jpg", eventName: "agentCallOperation_showTransfer" },
+    { name: AGENT_VOICE_BUTTON.CALLOUT, enabledbg: "callout.jpg", disablebg: "no_callout.jpg", eventName: "agentCallOperation_showCallOut" },
+    { name: AGENT_VOICE_BUTTON.SECONDAIL, enabledbg: "answer.jpg", disablebg: "no_answer.jpg", eventName: "" }
+];
