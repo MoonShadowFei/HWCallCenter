@@ -132,6 +132,8 @@ function agentLogin_loginSuccess(agentId, phoneNumber)
 				    agentConsole_debug("agent [" + agentId + "] login successfully.");
 				    $("#agentPanel_login").hide();
 				    $("#agentPanel_status").show();
+				    $.cookie("agentcookiestring", cookiestring);
+				    $.cookie("cc_agentid", agentId);
 					// reset skill successfully	
 					setTimeout("getEventLisnter()", 500);
 					break;

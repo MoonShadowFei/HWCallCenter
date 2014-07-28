@@ -82,6 +82,7 @@ function Proc_agentEvent_Ringing (event)
 	eventProcess_queryCallInfoByCallId(callId);
 	buttonInfo_changeButtonStatus(AGENT_BUTTON_STATUS.RINGING);
 	agentCallInfo_showCallInfo(callId, CALL_STATUS.ALERTING);
+	crmForm_openNewPopupScreen(event.content.otherPhone, event.content.feature, event.content.callid);
 }
 
 /**
@@ -94,6 +95,7 @@ function Proc_agentEvent_autoAnswer(event)
 	global_currentDealCallId = callId;
 	eventProcess_queryCallInfoByCallId(callId);
 	agentCallInfo_showCallInfo(callId, CALL_STATUS.ALERTING);
+	crmForm_openNewPopupScreen(event.content.otherPhone, event.content.feature, event.content.callid);
 }
 
 
