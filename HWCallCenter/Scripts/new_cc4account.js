@@ -11,7 +11,7 @@
     }
     REST.apiURL = "http://192.168.1.110:80/agentgateway/resource/";
     var cstring = $.cookie("agentcookiestring");
-    var agentid = $.cookie("cc_agentid");
+    var agentId = $.cookie("cc_agentid");
     cookiestring = cstring;
     var retJson = VoiceCall.callout({
         "agentid": agentId,
