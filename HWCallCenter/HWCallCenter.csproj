@@ -72,6 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PhoneCallRecord.aspx" />
+    <Content Include="Scripts\new_agent_resource.js" />
+    <Content Include="Scripts\new_cc4account.js" />
     <Content Include="Web.config" />
     <Content Include="_imgs\cmd_add.png" />
     <Content Include="_imgs\refresh16.gif" />

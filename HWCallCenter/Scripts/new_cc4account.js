@@ -1,4 +1,5 @@
-﻿function agent_callout() {
+﻿var t_proxyUrl="http://192.168.1.110:80/agentgateway/resource/";
+function agent_callout() {
     var phone = Xrm.Page.getAttribute("telephone1").getValue();
     if (phone == null) {
         phone = Xrm.Page.getAttribute("mobilephone").getValue();
@@ -9,7 +10,7 @@
         alert("There is no available phone number!");
         return;
     }
-    REST.apiURL = "http://192.168.1.110:80/agentgateway/resource/";
+    REST.apiURL = t_proxyUrl;
     var cstring = $.cookie("agentcookiestring");
     var agentId = $.cookie("cc_agentid");
     cookiestring = cstring;
@@ -64,7 +65,7 @@ function agent_calloutFromList(ids) {
         alert("There is no avaulable phone number!");
         return;
     }
-    REST.apiURL = "http://192.168.1.110:80/agentgateway/resource/";
+    REST.apiURL = t_proxyUrl;
     var cstring = $.cookie("agentcookiestring");
     var agentId = $.cookie("cc_agentid");
     cookiestring = cstring;
