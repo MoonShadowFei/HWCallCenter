@@ -119,7 +119,7 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
     <ul>
     <li id="agentPanel_login" style="float:right;margin-left:10px;height:20px;margin-left:5px;margin-right:5px;padding-top:2px;">
     WorkNo:<input type="text" maxlength="5" id="agentLogin_agentId" style="width:50px;border:0px;"/>
-    Password:<input type="text" maxlength="20" id="agentLogin_password" style="width:100px;border:0px;"/>
+    Password:<input type="text" maxlength="20" id="agentLogin_password" style="width:70px;border:0px;"/>
     PhoneNumber:<input type="text" maxlength="24" id="agentLogin_phonenumber" style="width:50px;border:0px;"/>
     LoginStatus:<select id="agentLogin_loginstatus" style="border:0px;">
 	    <option value="4">Idle</option>
