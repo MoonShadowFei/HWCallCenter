@@ -132,6 +132,8 @@ function agentLogin_loginSuccess(agentId, phoneNumber)
 				    agentConsole_debug("agent [" + agentId + "] login successfully.");
 				    $("#agentPanel_login").hide();
 				    $("#agentPanel_status").show();
+				    $("#agentLogin_logout img").attr("src", "/_imgs/logout.jpg");
+				    $("#agentLogin_login img").attr("src", "/_imgs/no_logon.jpg");
 				    $.cookie("agentcookiestring", cookiestring);
 				    $.cookie("cc_agentid", agentId);
 					// reset skill successfully	
@@ -175,6 +177,8 @@ function agentLogin_lagout()
                     agentConsole_debug("agent [" + global_agentInfo.agentId + "] logout successfully.");
                     $("#agentPanel_status").hide();
                     $("#agentPanel_login").show();
+                    $("#agentLogin_logout img").attr("src", "/_imgs/no_logout.jpg");
+                    $("#agentLogin_login img").attr("src", "/_imgs/logon.jpg");
                     // reset skill successfully	
                     setTimeout("getEventLisnter()", 500);
                     break;

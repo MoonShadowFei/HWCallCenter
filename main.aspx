@@ -159,8 +159,14 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 </li>
 <li>
 <span id="agentLogin_logout" onclick="agentLogin_doLogout()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
-<img src="/_imgs/logout.jpg" alt="Íâºô" title="" style="width:18px;" />
+<img src="/_imgs/no_logout.jpg" alt="Íâºô" title="" style="width:18px;" />
 <span >Logout</span>
+</span>
+</li>
+<li>
+<span id="agentCall_threeParty" onclick="agentCallOperation_showThreeParty()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
+<img src="/_imgs/conference.jpg" alt="Íâºô" title="" style="width:18px;" />
+<span >Conference</span>
 </span>
 </li>
 <li>
@@ -194,7 +200,7 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 </span>
 </li>
 <li>
-<span id="agentCall_answer" onclick="agentCallOperation_toAnswer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
+<span id="agentCall_answer" onclick="agentCallOperation_toAnswer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;display:none;" >
 <img src="/_imgs/answer.jpg" alt="Login" title="" style="width:18px"  />
 <span >Answer</span>
 </span>
@@ -293,18 +299,18 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 <script type="text/javascript">
 
     var qs = window.location.search.substr(1);
+    var agentInfo = crmData_getUserInfo(Xrm.Page.context.getUserId().toString());
     var homepage = false;
     if (qs == '') //homepage
     {
         homepage = true;
     }
-    if (!homepage) {
+    if (!homepage || agentInfo.userID == "") {
         $("#callcenterholder").hide();
         $("#agent_DetailPanel").hide();
     } else {
         var userID = "";
         var agentPhone = "";
-        var agentInfo = crmData_getUserInfo(Xrm.Page.context.getUserId().toString());
         if (agentInfo) {
             userID = agentInfo.userID;
             agentPhone = agentInfo.userPhone;
