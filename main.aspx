@@ -305,7 +305,7 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
     {
         homepage = true;
     }
-    if (!homepage || agentInfo.userID == "") {
+    if (!homepage || !agentInfo.userID) {
         $("#callcenterholder").hide();
         $("#agent_DetailPanel").hide();
     } else {
