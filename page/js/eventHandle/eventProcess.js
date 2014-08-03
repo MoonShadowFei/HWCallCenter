@@ -77,12 +77,29 @@ function Proc_agentEvent_phoneAlerting(event)
  */
 function Proc_agentEvent_Ringing (event)
 {
-	var callId = event.content.callid;
-	global_currentDealCallId = callId;
-	eventProcess_queryCallInfoByCallId(callId);
-	buttonInfo_changeButtonStatus(AGENT_BUTTON_STATUS.RINGING);
-	agentCallInfo_showCallInfo(callId, CALL_STATUS.ALERTING);
-	crmForm_openNewPopupScreen(event.content.otherPhone, event.content.feature, event.content.callid);
+    var callId = event.content.callid;
+    global_currentDealCallId = callId;
+    eventProcess_queryCallInfoByCallId(callId);
+    buttonInfo_changeButtonStatus(AGENT_BUTTON_STATUS.RINGING);
+    agentCallInfo_showCallInfo(callId, CALL_STATUS.ALERTING);
+    //crmForm_openNewPopupScreen(event.content.otherPhone, event.content.feature, event.content.callid);
+
+
+    var callInfo = global_allCallInfo.get(global_currentDealCallId);
+    var callFeature = CALL_FEATURE.OTHER;
+    var otherParty = callInfo.caller;
+    if (callInfo.callfeature != undefined
+			&& callInfo.callfeature != null) {
+        callFeature = parseInt(callInfo.callfeature);
+    }
+    switch (callFeature) {
+        case CALL_FEATURE.FEATURE_OUT:
+            otherParty = callInfo.called;
+            break;
+        default:
+            break;
+    }
+    crmForm_openNewPopupScreen(otherParty, callFeature, event.content.callid);
 }
 
 /**
@@ -95,7 +112,22 @@ function Proc_agentEvent_autoAnswer(event)
 	global_currentDealCallId = callId;
 	eventProcess_queryCallInfoByCallId(callId);
 	agentCallInfo_showCallInfo(callId, CALL_STATUS.ALERTING);
-	crmForm_openNewPopupScreen(event.content.otherPhone, event.content.feature, event.content.callid);
+
+	var callInfo = global_allCallInfo.get(global_currentDealCallId);
+	var callFeature = CALL_FEATURE.OTHER;
+	var otherParty = callInfo.caller;
+	if (callInfo.callfeature != undefined
+			&& callInfo.callfeature != null) {
+	    callFeature = parseInt(callInfo.callfeature);
+	}
+	switch (callFeature) {
+	    case CALL_FEATURE.FEATURE_OUT:
+	        otherParty = callInfo.called;
+	        break;
+	    default:
+	        break;
+	}
+	crmForm_openNewPopupScreen(otherParty, callFeature, event.content.callid);
 }
 
 
@@ -112,7 +144,9 @@ function Proc_agentEvent_customerAlerting(event)
 	{
 		//Agent do callout and the customer phone is ringing.
 	    agentCallInfo_showCurrentCallInfo(otherParty, CALL_STATUS.ALERTING, CALL_FEATURE.FEATURE_OUT);
-	    crmForm_openNewPopupScreen(event.content.otherPhone, event.content.feature, event.content.callid);
+
+
+	    crmForm_openNewPopupScreen(event.content.otherPhone, CALL_FEATURE.FEATURE_OUT, event.content.callid);
 		return;
 	}
 	if (global_currentInnercallCallId == callId)

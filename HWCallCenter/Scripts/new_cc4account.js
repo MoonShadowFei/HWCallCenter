@@ -2,7 +2,7 @@
 function agent_callout() {
     var phone = Xrm.Page.getAttribute("telephone1").getValue();
     if (phone == null) {
-        phone = Xrm.Page.getAttribute("mobilephone").getValue();
+        phone = Xrm.Page.getAttribute("new_mobilephone").getValue();
         if (phone == null)
             phone = Xrm.Page.getAttribute("telephone2").getValue();
     }
@@ -57,7 +57,7 @@ function agent_calloutFromList(ids) {
         return;
     }
     var entity = GetEntity("AccountSet", ids[0]);
-    var phone = entity.MobilePhone;
+    var phone = entity.new_mobilephone;
     if (phone == null) {
         phone = entity.Telephone1;
     }

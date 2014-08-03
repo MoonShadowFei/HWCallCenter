@@ -41,10 +41,13 @@ function agentCallOperation_refreshWorknoList()
 		$("#agentCall_transferWindow_worklist tbody").empty();
 		$("#agentCall_transferWindow_worklist tbody").append(buffer.join(""));
 	}
+	else if ("600-004" == retResult) {
+	    return;
+	}
 	else
 	{
-		alert("query online agent failed. Retcode : " + retResult);
-	}	
+	    alert("query online agent failed. Retcode : " + retResult);
+	}
 }
 
 /**

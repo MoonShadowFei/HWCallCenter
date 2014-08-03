@@ -94,10 +94,13 @@ function buttonInfo_disableButton(buttonArray)
 	for (var i in buttonArray)
 	{
 	    $("#" + buttonArray[i]).attr("disabled", "disabled");
-	    $("#" + buttonArray[i]).unbind("click");
+	    //$("#" + buttonArray[i]).unbind("click");
 	    for (var j = 0; j < AGENT_BUTTON_DETAILS.length; j++) {
 	        if (buttonArray[i] == AGENT_BUTTON_DETAILS[j].name) {
 	            $("#" + buttonArray[i] + " img").attr("src", "/_imgs/" + AGENT_BUTTON_DETAILS[j].disablebg);
+	            if (true == AGENT_BUTTON_DETAILS[j].toHide) {
+	                $("#" + buttonArray[i]).hide();
+	            }
 	        }
 	    }
 	}
@@ -113,8 +116,11 @@ function buttonInfo_enableButton(buttonArray)
 	    $("#" + buttonArray[i]).removeAttr("disabled");
 	    for (var j = 0; j < AGENT_BUTTON_DETAILS.length; j++) {
 	        if (buttonArray[i] == AGENT_BUTTON_DETAILS[j].name) {
-	            $("#" + buttonArray[i]).bind("click", AGENT_BUTTON_DETAILS[j].eventName);
+	            //$("#" + buttonArray[i]).bind("click", AGENT_BUTTON_DETAILS[j].eventName);
 	            $("#" + buttonArray[i] + " img").attr("src", "/_imgs/" + AGENT_BUTTON_DETAILS[j].enabledbg);
+	            if (true == AGENT_BUTTON_DETAILS[j].toHide) {
+	                $("#" + buttonArray[i]).show();
+	            }
 	        }
 	    }
 	}
@@ -710,12 +716,16 @@ AGENT_BUTTON_STATUS.NOHOLDCALL={
 };
 
 AGENT_BUTTON_DETAILS = [
-    { name: AGENT_VOICE_BUTTON.ANSWER, enabledbg: "answer.jpg", disablebg: "no_answer.jpg", eventName: "agentCallOperation_toAnswer" },
-    { name: AGENT_VOICE_BUTTON.HANGUP, enabledbg: "hangup.jpg", disablebg: "no_hangup.jpg", eventName: "agentCallOperation_toHangUp" },
-    { name: AGENT_VOICE_BUTTON.HOLD, enabledbg: "hold.jpg", disablebg: "no_hold.jpg", eventName: "agentCallOperation_toHold" },
-    { name: AGENT_VOICE_BUTTON.UNHOLD, enabledbg: "unhold.jpg", disablebg: "no_unhold.jpg", eventName: "agentCallOperation_showUnHold" },
-    { name: AGENT_VOICE_BUTTON.THREEPARTY, enabledbg: "conference.jpg", disablebg: "no_conference.jpg", eventName: "" },
-    { name: AGENT_VOICE_BUTTON.TRANSFER, enabledbg: "transfer.jpg", disablebg: "no_transfer.jpg", eventName: "agentCallOperation_showTransfer" },
-    { name: AGENT_VOICE_BUTTON.CALLOUT, enabledbg: "callout.jpg", disablebg: "no_callout.jpg", eventName: "agentCallOperation_showCallOut" },
-    { name: AGENT_VOICE_BUTTON.SECONDAIL, enabledbg: "answer.jpg", disablebg: "no_answer.jpg", eventName: "" }
+    { name: AGENT_VOICE_BUTTON.ANSWER, enabledbg: "answer.jpg", disablebg: "no_answer.jpg", eventName: "agentCallOperation_toAnswer",toHide:true },
+    { name: AGENT_VOICE_BUTTON.HANGUP, enabledbg: "hangup.jpg", disablebg: "no_hangup.jpg", eventName: "agentCallOperation_toHangUp", toHide: true },
+    { name: AGENT_VOICE_BUTTON.HOLD, enabledbg: "hold.jpg", disablebg: "no_hold.jpg", eventName: "agentCallOperation_toHold", toHide: true },
+    { name: AGENT_VOICE_BUTTON.UNHOLD, enabledbg: "unhold.jpg", disablebg: "no_unhold.jpg", eventName: "agentCallOperation_showUnHold", toHide: true },
+    { name: AGENT_VOICE_BUTTON.THREEPARTY, enabledbg: "conference.jpg", disablebg: "no_conference.jpg", eventName: "", toHide: true },
+    { name: AGENT_VOICE_BUTTON.TRANSFER, enabledbg: "transfer.jpg", disablebg: "no_transfer.jpg", eventName: "agentCallOperation_showTransfer", toHide: true },
+    { name: AGENT_VOICE_BUTTON.CALLOUT, enabledbg: "callout.jpg", disablebg: "no_callout.jpg", eventName: "agentCallOperation_showCallOut", toHide: true },
+    { name: AGENT_VOICE_BUTTON.SECONDAIL, enabledbg: "answer.jpg", disablebg: "no_answer.jpg", eventName: "", toHide: true },
+    { name: AGENT_VOICE_BUTTON.INNERCALL, enabledbg: "innercall.jpg", disablebg: "no_innercall.jpg", eventName: "", toHide: true },
+    { name: AGENT_VOICE_BUTTON.INNERHELP, enabledbg: "innerhelp.jpg", disablebg: "no_innerhelp.jpg", eventName: "", toHide: true },
+    { name: AGENT_VOICE_BUTTON.METU, enabledbg: "mute.jpg", disablebg: "mute.jpg", eventName: "", toHide: true },
+    { name: AGENT_VOICE_BUTTON.UNMETUE, enabledbg: "unmute.jpg", disablebg: "unmute.jpg", eventName: "", toHide: true }
 ];

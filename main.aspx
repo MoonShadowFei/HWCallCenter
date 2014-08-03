@@ -154,36 +154,60 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 <ul id="agentPanel_buttonlist">
 <li>
 <span id="agentButton_detailpanel" onclick="agentPanel_showDetailPanel()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
-<img src="/_imgs/arrow_down.jpg" alt="Login" title="" style="width:18px"  />
+<img src="/_imgs/arrow_down.jpg" alt="Open detail panel" title="" style="width:18px"  />
 </span>
 </li>
 <li>
-<span id="agentLogin_logout" onclick="agentLogin_doLogout()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
-<img src="/_imgs/no_logout.jpg" alt="外呼" title="" style="width:18px;" />
+<span id="agentLogin_logout" onclick="agentLogin_doLogout()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" style="display:none;">
+<img src="/_imgs/no_logout.jpg" alt="Logout" title="" style="width:18px;" />
 <span >Logout</span>
 </span>
 </li>
 <li>
-<span id="agentCall_threeParty" onclick="agentCallOperation_showThreeParty()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
-<img src="/_imgs/conference.jpg" alt="外呼" title="" style="width:18px;" />
+<span id="Span1" onclick="agentCallOperation_toUnMetu()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" style="display:none;">
+<img src="/_imgs/unmute.jpg" alt="Conference" title="" style="width:18px;" />
+<span >Unmetu</span>
+</span>
+</li>
+<li>
+<span id="agentCall_mute" onclick="agentCallOperation_toMetu()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" style="display:none;">
+<img src="/_imgs/mute.jpg" alt="Conference" title="" style="width:18px;"  />
+<span >Mute</span>
+</span>
+</li>
+<li>
+<span id="agentCall_threeParty" onclick="agentCallOperation_showThreeParty()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" style="display:none;">
+<img src="/_imgs/conference.jpg" alt="Conference" title="" style="width:18px;" />
 <span >Conference</span>
 </span>
 </li>
 <li>
-<span id="agentCall_unHold" onclick="agentCallOperation_showUnHold()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
-<img src="/_imgs/unhold.jpg" alt="外呼" title="" style="width:18px;" />
+<span id="agentCall_innercall" onclick="agentCallOperation_showInnerCall()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
+<img src="/_imgs/innercall.jpg" alt="Logout" title="" style="width:18px;" />
+<span >Innercall</span>
+</span>
+</li>
+<li>
+<span id="agentCall_innerhelp" onclick="agentCallOperation_showInnerHelp()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" style="display:none;">
+<img src="/_imgs/innerhelp.jpg" alt="Innerhelp" title="" style="width:18px;" />
+<span >Innerhelp</span>
+</span>
+</li>
+<li>
+<span id="agentCall_unHold" onclick="agentCallOperation_showUnHold()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" style="display:none;">
+<img src="/_imgs/unhold.jpg" alt="Unhold" title="" style="width:18px;" />
 <span >Unhold</span>
 </span>
 </li>
 <li>
 <span id="agentCall_transfer" onclick="agentCallOperation_showTransfer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" >
-<img src="/_imgs/transfer.jpg" alt="外呼" title="" style="width:18px;" />
+<img src="/_imgs/transfer.jpg" alt="Transfer" title="" style="width:18px;" />
 <span >Transfer</span>
 </span>
 </li>
 <li >
-<span id="agentCall_hold" onclick="agentCallOperation_toHold()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  >
-<img src="/_imgs/hold.jpg" alt="外呼" title="" style="width:18px;" />
+<span id="agentCall_hold" onclick="agentCallOperation_toHold()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="display:none;">
+<img src="/_imgs/hold.jpg" alt="Hold" title="" style="width:18px;" />
 <span >Hold</span>
 </span>
 </li>
@@ -200,7 +224,7 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 </span>
 </li>
 <li>
-<span id="agentCall_answer" onclick="agentCallOperation_toAnswer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;display:none;" >
+<span id="agentCall_answer" onclick="agentCallOperation_toAnswer()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"  style="height:28px;cursor:pointer;padding:2px;" >
 <img src="/_imgs/answer.jpg" alt="Login" title="" style="width:18px"  />
 <span >Answer</span>
 </span>
