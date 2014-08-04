@@ -17,9 +17,9 @@
 <script type="text/javascript" src="/ISV/page/openjs/jquery-1.6.2.js"></script>
 <script type="text/javascript" src="/ISV/page/openjs/json.js"></script>
 <script type="text/javascript" src="/ISV/page/openjs/jquery.cookie.js"></script>
-<script type="text/javascript" src="http://192.168.1.110:80/agentgateway/resource-js"></script>
+<script type="text/javascript" src="http://58.251.159.113:8080/agentgateway/resource-js"></script>
 <script type="text/javascript">
-    REST.apiURL = "http://192.168.1.110:80/agentgateway/resource/";
+    REST.apiURL = "http://58.251.159.113:8080/agentgateway/resource/";
 </script> 
 <script type="text/javascript" src="/ISV/page/js/common/common.js"></script>
 <script type="text/javascript" src="/ISV/page/js/common/constants.js"></script>
