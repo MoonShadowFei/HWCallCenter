@@ -455,3 +455,182 @@ function eventProcess_refreshCallInfo()
 		global_allCallInfo.put(ctiCallInfo.callid, callInfo);
 	}
 }*/
+
+
+/**----------------------------------文字交谈事件-----------------------------------*/
+
+/**
+ * 接收到文字
+ */
+function Proc_AgentChat_DataRecved(oneEvent) {
+    var senderAddrType = oneEvent.content.senderaddrtype;
+    if (senderAddrType != ADDRESS_TYPE.AGENTID) {
+        //不是内部呼叫
+        switch (oneEvent.content.type) {
+            case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
+                agentTextChatControl_dataRecvedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[1]://新浪微博
+            case TEXTCHAT_MEDIATYPE[4]://腾讯微博
+                agentWeiboChatControl_dataRecvedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[2]:
+                agentOnlineMsgControl_dataRecvedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[3]://邮件
+                agentMailChatControl_dataRecvedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[6]://传真
+                agentFaxChatControl_dataRecvedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[7]://语音留言
+                agentVoiceChatControl_dataRecvedEvent(oneEvent);
+                break;
+            default:
+                break;
+        }
+        return;
+    }
+
+    agentTextChatControl_dataRecvedEvent(oneEvent);
+}
+
+/**
+ * 结束文字交谈
+ * @param oneEvent
+ */
+function Proc_AgentChat_Disconnected(oneEvent) {
+    global_textChatCallNumber--;
+    /**
+	*释放转时，座席会收到两个断连事件
+	*/
+    var callId = oneEvent.content.callid;
+    var type = $("#li_" + callId).attr("type");
+    if (type == undefined) {
+        return;
+    }
+    switch (type) {
+        case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
+            agentTextChatControl_disconnectedEvent(oneEvent);
+            break;
+        case TEXTCHAT_MEDIATYPE[1]://新浪微博
+        case TEXTCHAT_MEDIATYPE[4]://腾讯微博
+            agentWeiboChatControl_disconnectedEvent(oneEvent);
+            break;
+        case TEXTCHAT_MEDIATYPE[2]://在线留言
+            agentOnlineMsgControl_disconnectedEvent(oneEvent);
+            break;
+        case TEXTCHAT_MEDIATYPE[3]://邮件
+            agentMailChatControl_disconnectedEvent(oneEvent);
+            break;
+        case TEXTCHAT_MEDIATYPE[6]://传真
+            agentFaxChatControl_disconnectedEvent(oneEvent);
+            break;
+        case TEXTCHAT_MEDIATYPE[7]://语音留言
+            agentVoiceChatControl_disconnectedEvent(oneEvent);
+            break;
+        default:
+            break;
+    }
+    return;
+}
+
+
+
+/**
+ * 建立文字交谈
+ * @param oneEvent
+ */
+function Proc_AgentChat_Connected(oneEvent) {
+    global_textChatCallNumber++;
+    global_agentCurCallType = AGENT_CALLTYPE.CHAT;
+    if (global_agentCurState == AGENT_STATE.IDLE
+			&& $("#agentCallControl_agentWorkStatus").hasClass("WorkStatus1")) {
+        updateIconState(global_agentCurCallType, global_agentCurState, global_callOperateType);
+    }
+    var senderAddrType = oneEvent.content.senderaddrtype;
+    if (senderAddrType != ADDRESS_TYPE.AGENTID) {
+        //不是内部呼叫
+        switch (oneEvent.content.type) {
+            case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
+                //agentTextChatControl_connectedEvent(oneEvent);
+                Proc_AgentChat_ShowWebchatTab();
+                break;
+            case TEXTCHAT_MEDIATYPE[1]://新浪微博
+            case TEXTCHAT_MEDIATYPE[4]://腾讯微博
+                //agentWeiboChatControl_connectedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[2]://在线留言
+                //agentOnlineMsgControl_connectedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[3]://邮件
+                //agentMailChatControl_connectedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[6]://传真
+                //agentFaxChatControl_connectedEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[7]://语音留言
+                //agentVoiceChatControl_connectedEvent(oneEvent);
+                break;
+            default:
+                break;
+        }
+        return;
+    }
+    agentCallControl_setAgentCallStatus("TALKING");
+    agentTextChatControl_connectedEvent(oneEvent);
+
+}
+
+/**
+ * 文字交谈振铃
+ * @param oneEvent
+ */
+function Proc_AgentChat_Ring(oneEvent) {
+    //agentCallControl_toCloseDialogWhenChat();
+    /*Start Modify 问题单号：DTS2012031406949,  修改时间：2012-3-24*/
+
+    //windwoMaximize();
+    //mainFrame_addTab("tab_agentTextChat", "agentControlDiv_textChat", getNL("ZEUS.MAINFRAME.TEXTCHAT.MANAGEMENT"));
+    var senderAddrType = oneEvent.content.senderaddrtype;
+    if (senderAddrType != ADDRESS_TYPE.AGENTID) {
+        //callTime_computeTextChatAnswerNumber();
+        switch (oneEvent.content.type) {
+            case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
+                //agentCallControl_showEventMsg(getNL("ZEUS.TEXTCHAT.ONLINECHAT.COMING.HINT"));
+                //agentTextChatControl_ringEvent(oneEvent);
+                var callid = oneEvent.con.called;
+                agentTextChatOperation_toChatAnswer(callid);
+                break;
+            case TEXTCHAT_MEDIATYPE[1]://新浪微博
+            case TEXTCHAT_MEDIATYPE[4]://腾讯微博
+                break;
+            case TEXTCHAT_MEDIATYPE[2]: //在线留言
+                break;
+            case TEXTCHAT_MEDIATYPE[3]://邮件
+                agentCallControl_showEventMsg(getNL("ZEUS.TEXTCHAT.MAIL.COMING.HINT"));
+                agentMailChatControl_ringEvent(oneEvent);
+                break;
+            case TEXTCHAT_MEDIATYPE[6]://传真
+                break;
+            case TEXTCHAT_MEDIATYPE[7]://语音留言
+                break;
+            default:
+                break;
+        }
+        return;
+    }
+    //agentCallControl_showEventMsg(getNL("ZEUS.TEXTCHAT.ONLINECHAT.COMING.HINT"));
+    //agentTextChatControl_ringEvent(oneEvent);
+    /*Start Modify 问题单号：DTS2012031406949,  修改时间：2012-3-24*/
+}
+
+function Proc_AgentChat_ShowWebchatTab() {
+    var bwidth = $(window).width();
+    var bheight = $(window).height();
+    var tabwidth = $("#agent_WebchatTab").outerWidth(true);
+    var tabheight = $("#agent_WebchatTab").outerHeight(true);
+    var left=10;
+    var top = bheight - tabheight - 2;
+    $("#agent_WebchatTab").css("left", left).css("top", top).css("background-color","#444444").show();
+}

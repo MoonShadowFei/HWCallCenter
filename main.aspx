@@ -312,6 +312,42 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
 
 </div>
 
+<!--add for Webchar Panel -->
+<div id="agent_WebchatPanel">
+    <div id="agent_WebchatHeader">
+        <div id="webchat_FormButtons">
+            <ul>
+                <li>
+                    <span id="webchat_CustomInfo"></span>
+                </li>
+                <li>
+                    <input id="webchat_min" />
+                </li>
+                <li>
+                    <input id="webchat_max" />
+                </li>
+                <li>
+                    <input id="webchat_close" />
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+
+    <div id="agent_WebchatContent">
+
+    </div>
+    
+    <div id="agent_WebchatFooter">
+        <div id="webchat_InputArea"></div>
+        <div id="webchat_Buttons"></div>
+    </div>
+</div>
+<div id="agent_WebchatTab">
+    <span>Webchat</span>
+    
+</div>
+
 <div>
 <cnt:AppNavBar id="crmAppNav" runat="server"></cnt:AppNavBar>
 <cnt:SplitterControl id="crmSplitterControl" runat="server"></cnt:SplitterControl>

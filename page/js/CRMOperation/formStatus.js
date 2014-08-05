@@ -14,3 +14,19 @@ function crmForm_openNewPopupScreen(callerid, feature, uniqueid) {
     window.open(strNewUrl, "", 'width=800,height=400,top=60,left=60,toolbar=no,resizable=yes,menubar=no,status=no,location=no,scrollbar=yes');
     //------------------------------- 打开电话联络窗口结束-----------------------------------
 }
+
+function crmForm_webchatTabClick() {
+    if ($("#agent_WebchatPanel").is(":hidden")) {
+        var bwidth = $(window).width();
+        var bheight = $(window).height();
+        var tabwidth = $("#agent_WebchatTab").outerWidth(true);
+        var tabheight = $("#agent_WebchatTab").outerHeight(true);
+        var panelheight = $("agent_WebchatPanel").outerHeight(true);
+        var left = 10;
+        var top = bheight - tabheight - 2 - panelheight;
+        $("#agent_WebchatPanel").css("left",left).css("top",top).show();
+        $("#agent_WebchatTab").css("background-color", "white");
+    } else {
+        $("#agent_WebchatPanel").hide();
+    }
+}
