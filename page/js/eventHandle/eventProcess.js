@@ -511,7 +511,8 @@ function Proc_AgentChat_Disconnected(oneEvent) {
     }
     switch (type) {
         case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
-            agentTextChatControl_disconnectedEvent(oneEvent);
+            //agentTextChatControl_disconnectedEvent(oneEvent);
+            $("#agent_WebchatTab").attr("callid", "");
             break;
         case TEXTCHAT_MEDIATYPE[1]://新浪微博
         case TEXTCHAT_MEDIATYPE[4]://腾讯微博
@@ -555,6 +556,7 @@ function Proc_AgentChat_Connected(oneEvent) {
             case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
                 //agentTextChatControl_connectedEvent(oneEvent);
                 Proc_AgentChat_ShowWebchatTab();
+                $("#agent_WebchatTab").attr("callid", oneEvent.content.callid);
                 break;
             case TEXTCHAT_MEDIATYPE[1]://新浪微博
             case TEXTCHAT_MEDIATYPE[4]://腾讯微博
@@ -599,8 +601,10 @@ function Proc_AgentChat_Ring(oneEvent) {
             case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
                 //agentCallControl_showEventMsg(getNL("ZEUS.TEXTCHAT.ONLINECHAT.COMING.HINT"));
                 //agentTextChatControl_ringEvent(oneEvent);
-                var callid = oneEvent.con.called;
-                agentTextChatOperation_toChatAnswer(callid);
+                if (!($("#agent_WebchatTab").attr("callid")) || $("#agent_WebchatTab").attr("callid") == "") {
+                    var callid = oneEvent.con.callid;
+                    agentTextChatOperation_toChatAnswer(callid);
+                }
                 break;
             case TEXTCHAT_MEDIATYPE[1]://新浪微博
             case TEXTCHAT_MEDIATYPE[4]://腾讯微博

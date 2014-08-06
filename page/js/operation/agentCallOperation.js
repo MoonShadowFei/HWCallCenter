@@ -560,6 +560,35 @@ function agentTextChatControl_getChatMessage(chatId, callId) {
                     global_resultCode.handleErrorCode(retcode, res.message);
                     break;
             }
+        },
+        $callback2: function (result, data) {
+            var res = JSON.parse(data.responseText);
+            var retcode = res.retcode;
+            switch (retcode) {
+                case global_resultCode.SUCCESSCODE:
+                    //消息接收成功
+                    var msgData = res.result;
+                    var content = msgData.content;
+                    //alertDIV(htmlEncode(content));
+                    var sender = msgData.sender;
+                    var sendDate = msgData.senddate;
+                    var curTime = new Date(parseInt(sendDate)).format("hh:mm:ss");
+                    var html = "";
+                    var type = msgData.contenttype;
+                    var preChatMan = $("#li_" + callId).attr("preChatMan");
+
+                    var msgType = 1;
+
+                    if (content == "") {
+                        content = "&nbsp;";
+                    }
+
+                    html = "<div class='msg_head'><h2><span>" + sender + "&nbsp;" + curTime
+								+ "</span></h2></div><div><span class='msg_content'>" + content + "</span></div>";
+                    $("#agent_WebchatContent").append(html);
+                default:
+                    break;
+            }
         }
     });
 
