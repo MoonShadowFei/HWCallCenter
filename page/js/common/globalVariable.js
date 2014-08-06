@@ -11,3 +11,4 @@ var global_currentInnercallAgent = "";
 var global_currentDealCallId = "";
 var global_currentHoldList = new Array();
 var global_currentConferenceType = "";
+var global_currentTextChatCallId = "";

@@ -429,139 +429,139 @@ function agentTextChatControl_getChatMessage(chatId, callId) {
     TextChat.getChatMessage({
         "chatid": chatId,
         "workno": global_agentInfo.workno,
+        //$callback: function (result, data) {
+        //    var res = JSON.parse(data.responseText);
+        //    var retcode = res.retcode;
+        //    switch (retcode) {
+        //        case global_resultCode.SUCCESSCODE:
+
+        //            //消息接收成功
+        //            var msgData = res.result;
+        //            var content = msgData.content;
+        //            //alertDIV(htmlEncode(content));
+        //            var sender = msgData.sender;
+        //            var sendDate = msgData.senddate;
+        //            var curTime = new Date(parseInt(sendDate)).format("hh:mm:ss");
+        //            var html = "";
+        //            var type = msgData.contenttype;
+        //            var preChatMan = $("#li_" + callId).attr("preChatMan");
+        //            var textImageArray = new HashMap();
+        //            var msgType = 1;
+        //            var isShowFace = false;
+        //            if (type == TEXTCHAT_MESSAGETYPE.TYPE_ATTACHFILE) {
+        //                //为附件
+        //                return;
+        //            }
+        //            else if (type == TEXTCHAT_MESSAGETYPE.TYPE_IMAGE) {
+        //                //为图片
+        //                //获取上一次发言人
+        //                if (preChatMan == 'other') {
+        //                    //上一次发言人为自己
+        //                    html = "<span class='msg_content'><img src='" + ELPIS_PUBLISH_ADDRESS + "/resource/textchat/" + global_agentInfo.workno + "/getphoto/"
+		//					+ content + "?Guid=" + cookiestring + "' border='0' width='250px' height='250px' style='cursor:pointer' ></span>";
+        //                    agentTextChatControl_continuousChat(callId);
+        //                }
+        //                else {
+        //                    if ($("#li_" + callId).attr("isAgent") == "true") {
+        //                        //消息发送方为座席
+        //                        sender = $("#agentTextChatControl_clientOrAgent_a" + callId).text();//getLanguage("ZEUS.TEXTCHAT.ROLE.AGENT", [sender]);
+        //                    }
+        //                    else {
+        //                        sender = $("#agentTextChatControl_clientOrAgent_a" + callId).text();
+
+        //                    }
+        //                    html = "<div class='customer'><h2><span>" + sender + "&nbsp;" + curTime + "</span></h2></div><div><span class='msg_content'><img src='"
+		//					+ ELPIS_PUBLISH_ADDRESS + "/resource/textchat/" + global_agentInfo.workno + "/getphoto/" + content + "?Guid=" + cookiestring
+		//					+ "' border='0' width='250px' height='250px' style='cursor:pointer'></span></div>";
+        //                    //设置上次发言人为其他
+        //                    $("#li_" + callId).attr("preChatMan", "other");
+        //                    isShowFace = true;
+        //                }
+        //            }
+        //            else {
+        //                if (content == "") {
+        //                    content = "&nbsp;";
+        //                }
+        //                if ($("#li_" + callId).attr("isAgent") == "true") {
+        //                    //消息发送方为座席
+        //                    sender = $("#agentTextChatControl_clientOrAgent_a" + callId).text();//getLanguage("ZEUS.TEXTCHAT.ROLE.AGENT", [sender]);
+        //                    msgType = 4;
+        //                }
+        //                else {
+        //                    sender = $("#agentTextChatControl_clientOrAgent_a" + callId).text();
+
+        //                }
+
+        //                content = content.replace(/<a/gi, "<a target='_blank'");
+
+        //                var host = $("#li_" + callId).attr("host");
+        //                var otherAgent = $("#li_" + callId).attr("otherAgent");
+
+        //                var isFrom = "cusomter";
+        //                if (host == msgData.sender
+		//						|| otherAgent == msgData.sender) {
+        //                    //会议中其他座席发送的消息
+        //                    sender = getLanguage("ZEUS.TEXTCHAT.ROLE.AGENT", [msgData.sender]);
+        //                    isFrom = "agent";
+        //                }
+
+        //                if (isFrom == "cusomter") {
+        //                    if (preChatMan == 'other') {
+        //                        //上一次发言人为客户
+        //                        html = "<span class='msg_content'>" + content + "</span>";
+        //                        agentTextChatControl_continuousChat(callId);
+        //                    }
+        //                    else {
+        //                        html = "<div class='customer'><h2><span>" + sender + "&nbsp;" + curTime
+		//						+ "</span></h2></div><div><span class='msg_content'>" + content + "</span></div>";
+        //                        //设置上次发言人为其他
+        //                        $("#li_" + callId).attr("preChatMan", "other");
+        //                        isShowFace = true;
+        //                    }
+        //                }
+        //                else {
+        //                    if (preChatMan == 'otherAgent') {
+        //                        //上一次发言人为其他座席
+        //                        html = "<span class='msg_content'>" + content + "</span>";
+        //                        agentTextChatControl_continuousChat(callId);
+        //                    }
+        //                    else {
+        //                        html = "<div class='agent'><h2><span>" + sender + "&nbsp;" + curTime
+		//						+ "</span></h2></div><div><span class='msg_content'>" + content + "</span></div>";
+        //                        //设置上次发言人为其他
+        //                        $("#li_" + callId).attr("preChatMan", "otherAgent");
+        //                        isShowFace = true;
+        //                    }
+        //                }
+        //                var param1 = msgData.param1;
+        //                if (param1 != undefined && param1 != null && param1 != "") {
+        //                    var imgArray = param1.split(";");
+
+        //                    for (var i = 0; i < imgArray.length; i++) {
+        //                        textImageArray.put(imgArray[i], imgArray[i]);
+        //                    }
+        //                }
+
+        //            }
+        //            agentTextChatControl_setUnReadMsgNumber(callId);
+        //            agentTextChatControl_displayReceiver(callId, html, msgType, isShowFace);
+
+        //            $("#agentTextChatControl_divLoad_txtDisplayMsg_" + callId + "_frame").contents().find("img").each(function () {
+        //                var srcArray = $(this).attr("src").split("/");
+        //                var src = textImageArray.get(srcArray[srcArray.length - 1]);
+        //                if (src != "" && src != null && src != undefined) {
+        //                    $(this).attr("src", ELPIS_PUBLISH_ADDRESS + "/resource/textchat/" + global_agentInfo.workno + "/getphoto/" + src + "?Guid=" + cookiestring);
+        //                }
+        //            });
+        //            break;
+
+        //            //根据错误码和错误信息，获取提示信息并弹框
+        //        default:
+        //            global_resultCode.handleErrorCode(retcode, res.message);
+        //            break;
+        //    }
+        //},
         $callback: function (result, data) {
-            var res = JSON.parse(data.responseText);
-            var retcode = res.retcode;
-            switch (retcode) {
-                case global_resultCode.SUCCESSCODE:
-
-                    //消息接收成功
-                    var msgData = res.result;
-                    var content = msgData.content;
-                    //alertDIV(htmlEncode(content));
-                    var sender = msgData.sender;
-                    var sendDate = msgData.senddate;
-                    var curTime = new Date(parseInt(sendDate)).format("hh:mm:ss");
-                    var html = "";
-                    var type = msgData.contenttype;
-                    var preChatMan = $("#li_" + callId).attr("preChatMan");
-                    var textImageArray = new HashMap();
-                    var msgType = 1;
-                    var isShowFace = false;
-                    if (type == TEXTCHAT_MESSAGETYPE.TYPE_ATTACHFILE) {
-                        //为附件
-                        return;
-                    }
-                    else if (type == TEXTCHAT_MESSAGETYPE.TYPE_IMAGE) {
-                        //为图片
-                        //获取上一次发言人
-                        if (preChatMan == 'other') {
-                            //上一次发言人为自己
-                            html = "<span class='msg_content'><img src='" + ELPIS_PUBLISH_ADDRESS + "/resource/textchat/" + global_agentInfo.workno + "/getphoto/"
-							+ content + "?Guid=" + cookiestring + "' border='0' width='250px' height='250px' style='cursor:pointer' ></span>";
-                            agentTextChatControl_continuousChat(callId);
-                        }
-                        else {
-                            if ($("#li_" + callId).attr("isAgent") == "true") {
-                                //消息发送方为座席
-                                sender = $("#agentTextChatControl_clientOrAgent_a" + callId).text();//getLanguage("ZEUS.TEXTCHAT.ROLE.AGENT", [sender]);
-                            }
-                            else {
-                                sender = $("#agentTextChatControl_clientOrAgent_a" + callId).text();
-
-                            }
-                            html = "<div class='customer'><h2><span>" + sender + "&nbsp;" + curTime + "</span></h2></div><div><span class='msg_content'><img src='"
-							+ ELPIS_PUBLISH_ADDRESS + "/resource/textchat/" + global_agentInfo.workno + "/getphoto/" + content + "?Guid=" + cookiestring
-							+ "' border='0' width='250px' height='250px' style='cursor:pointer'></span></div>";
-                            //设置上次发言人为其他
-                            $("#li_" + callId).attr("preChatMan", "other");
-                            isShowFace = true;
-                        }
-                    }
-                    else {
-                        if (content == "") {
-                            content = "&nbsp;";
-                        }
-                        if ($("#li_" + callId).attr("isAgent") == "true") {
-                            //消息发送方为座席
-                            sender = $("#agentTextChatControl_clientOrAgent_a" + callId).text();//getLanguage("ZEUS.TEXTCHAT.ROLE.AGENT", [sender]);
-                            msgType = 4;
-                        }
-                        else {
-                            sender = $("#agentTextChatControl_clientOrAgent_a" + callId).text();
-
-                        }
-
-                        content = content.replace(/<a/gi, "<a target='_blank'");
-
-                        var host = $("#li_" + callId).attr("host");
-                        var otherAgent = $("#li_" + callId).attr("otherAgent");
-
-                        var isFrom = "cusomter";
-                        if (host == msgData.sender
-								|| otherAgent == msgData.sender) {
-                            //会议中其他座席发送的消息
-                            sender = getLanguage("ZEUS.TEXTCHAT.ROLE.AGENT", [msgData.sender]);
-                            isFrom = "agent";
-                        }
-
-                        if (isFrom == "cusomter") {
-                            if (preChatMan == 'other') {
-                                //上一次发言人为客户
-                                html = "<span class='msg_content'>" + content + "</span>";
-                                agentTextChatControl_continuousChat(callId);
-                            }
-                            else {
-                                html = "<div class='customer'><h2><span>" + sender + "&nbsp;" + curTime
-								+ "</span></h2></div><div><span class='msg_content'>" + content + "</span></div>";
-                                //设置上次发言人为其他
-                                $("#li_" + callId).attr("preChatMan", "other");
-                                isShowFace = true;
-                            }
-                        }
-                        else {
-                            if (preChatMan == 'otherAgent') {
-                                //上一次发言人为其他座席
-                                html = "<span class='msg_content'>" + content + "</span>";
-                                agentTextChatControl_continuousChat(callId);
-                            }
-                            else {
-                                html = "<div class='agent'><h2><span>" + sender + "&nbsp;" + curTime
-								+ "</span></h2></div><div><span class='msg_content'>" + content + "</span></div>";
-                                //设置上次发言人为其他
-                                $("#li_" + callId).attr("preChatMan", "otherAgent");
-                                isShowFace = true;
-                            }
-                        }
-                        var param1 = msgData.param1;
-                        if (param1 != undefined && param1 != null && param1 != "") {
-                            var imgArray = param1.split(";");
-
-                            for (var i = 0; i < imgArray.length; i++) {
-                                textImageArray.put(imgArray[i], imgArray[i]);
-                            }
-                        }
-
-                    }
-                    agentTextChatControl_setUnReadMsgNumber(callId);
-                    agentTextChatControl_displayReceiver(callId, html, msgType, isShowFace);
-
-                    $("#agentTextChatControl_divLoad_txtDisplayMsg_" + callId + "_frame").contents().find("img").each(function () {
-                        var srcArray = $(this).attr("src").split("/");
-                        var src = textImageArray.get(srcArray[srcArray.length - 1]);
-                        if (src != "" && src != null && src != undefined) {
-                            $(this).attr("src", ELPIS_PUBLISH_ADDRESS + "/resource/textchat/" + global_agentInfo.workno + "/getphoto/" + src + "?Guid=" + cookiestring);
-                        }
-                    });
-                    break;
-
-                    //根据错误码和错误信息，获取提示信息并弹框
-                default:
-                    global_resultCode.handleErrorCode(retcode, res.message);
-                    break;
-            }
-        },
-        $callback2: function (result, data) {
             var res = JSON.parse(data.responseText);
             var retcode = res.retcode;
             switch (retcode) {
@@ -592,4 +592,99 @@ function agentTextChatControl_getChatMessage(chatId, callId) {
         }
     });
 
+}
+
+/**
+ * 结束文字交谈
+ */
+function agentTextChatControl_toDropChat() {
+
+    var callId = global_currentTextChatCallId;
+
+    TextChat.drop({
+        "workno": global_agentInfo.workno,
+        "callid": callId,
+        $callback: function (result, data) {
+            var res = JSON.parse(data.responseText);
+            var retcode = res.retcode;
+            switch (retcode) {
+                case global_resultCode.SUCCESSCODE:
+
+                    break;
+
+                    //根据错误码和错误信息，获取提示信息并弹框
+                default:
+                    alert("failed to end the chat!");
+                    break;
+            }
+        }
+    });
+
+}
+
+
+/**
+ * 发送文字消息
+ */
+function agentTextChatControl_toSendChat() {
+    var callId = global_currentTextChatCallId;
+    if (callId == "") {
+        return;
+    }
+    var msg = "";
+
+    if ($("#webchat_Input").val() && $("#webchat_Input").val() != "") {
+        msg = $("#webchat_Input").val();
+    }
+
+    TextChat.chat({
+        "workno": global_agentInfo.workno,
+        $entity: {
+            "callid": callId,
+            "content": msg
+        },
+        $callback: function (result, data) {
+            var res = JSON.parse(data.responseText);
+            var retcode = res.retcode;
+
+            if (msg == "") {
+                msg = "&nbsp;";
+            }
+            switch (retcode) {
+                case global_resultCode.SUCCESSCODE:
+                    var curdate = new Date();
+                    var hours = curdate.getHours() < 10 ? "0" + curdate.getHours() : curdate.getHours();
+                    var minutes = curdate.getMinutes() < 10 ? "0" + curdate.getMinutes() : curdate.getMinutes();
+                    var seconds = curdate.getSeconds() < 10 ? "0" + curdate.getSeconds() : curdate.getSeconds();
+                    var curTime = hours + ":" + minutes + ":" + seconds;
+                    var html = "";
+
+                    html = "<div class='msg_head'><h2><span>" + "Agent" + "&nbsp;" + curTime
+                    + "</span></h2><span class='msg_content'>" + msg + "</span></div>";
+                    $("#agent_WebchatContent").append(html);
+                    $("#webchat_Input").val("");
+                    break;
+
+                case global_resultCode.AGT_CHAT_SEND_MESSAGE_FAIL:
+
+                    var html = "<div class='msg_head'><h2><span>" + "Failed to send text!"
+                    + "</span></h2></div>";
+
+                    break;
+
+                case global_resultCode.AGT_CHAT_FILTER_WORD:
+                    //存在敏感词
+                    var html = "<div class='msg_head'><h2><span>" + "Failed to send text!"
+                    + "</span></h2></div>";
+
+                    break;
+
+
+                    //根据错误码和错误信息，获取提示信息并弹框
+                default:
+                    //global_resultCode.handleErrorCode(retcode, res.message);
+                    break;
+            }
+        }
+    });
 }

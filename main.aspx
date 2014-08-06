@@ -339,8 +339,13 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
     </div>
     
     <div id="agent_WebchatFooter">
-        <div id="webchat_InputArea"></div>
-        <div id="webchat_Buttons"></div>
+        <div id="webchat_InputArea">
+            <textarea id="webchat_Input" style="overflow-y:scroll;height:98%;" maxlength="4000"></textarea>
+        </div>
+        <div id="webchat_Buttons">
+            <input type="button" id="webchat_button_endchat" value="EndChat" onclick="agentTextChatControl_toDropChat()"/>
+            <input type="button" id="webchat_button_send" value="Send" onclick="agentTextChatControl_toSendChat()"/>
+        </div>
     </div>
 </div>
 <div id="agent_WebchatTab">
