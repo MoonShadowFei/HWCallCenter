@@ -504,7 +504,7 @@ function Proc_AgentChat_Disconnected(oneEvent) {
 	*释放转时，座席会收到两个断连事件
 	*/
     var callId = oneEvent.content.callid;
-    var type = $("#li_" + callId).attr("type");
+    var type = oneEvent.content.type;
     if (type == undefined) {
         return;
     }

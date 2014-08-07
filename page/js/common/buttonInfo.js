@@ -98,9 +98,9 @@ function buttonInfo_disableButton(buttonArray)
 	    for (var j = 0; j < AGENT_BUTTON_DETAILS.length; j++) {
 	        if (buttonArray[i] == AGENT_BUTTON_DETAILS[j].name) {
 	            $("#" + buttonArray[i] + " img").attr("src", "/_imgs/" + AGENT_BUTTON_DETAILS[j].disablebg);
-	            if (true == AGENT_BUTTON_DETAILS[j].toHide) {
-	                $("#" + buttonArray[i]).hide();
-	            }
+	            //if (true == AGENT_BUTTON_DETAILS[j].toHide) {
+	            //    $("#" + buttonArray[i]).hide();
+	            //}
 	        }
 	    }
 	}
@@ -118,9 +118,9 @@ function buttonInfo_enableButton(buttonArray)
 	        if (buttonArray[i] == AGENT_BUTTON_DETAILS[j].name) {
 	            //$("#" + buttonArray[i]).bind("click", AGENT_BUTTON_DETAILS[j].eventName);
 	            $("#" + buttonArray[i] + " img").attr("src", "/_imgs/" + AGENT_BUTTON_DETAILS[j].enabledbg);
-	            if (true == AGENT_BUTTON_DETAILS[j].toHide) {
-	                $("#" + buttonArray[i]).show();
-	            }
+	            //if (true == AGENT_BUTTON_DETAILS[j].toHide) {
+	            //    $("#" + buttonArray[i]).show();
+	            //}
 	        }
 	    }
 	}

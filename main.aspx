@@ -172,7 +172,7 @@ var MS_CRM_CLIENT_OUTLOOK_INSTALLED=true;
 <li>
 <span id="agentCall_mute" onclick="agentCallOperation_toMetu()" onmouseover="mouseover(this)" onmouseout="mouseout(this)" style="display:none;">
 <img src="/_imgs/mute.jpg" alt="Conference" title="" style="width:18px;"  />
-<span >Mute</span>
+<span >Metu</span>
 </span>
 </li>
 <li>
@@ -349,7 +349,7 @@ class="<%=PopOutImageStripInfo.CssClass %>" />
     </div>
 </div>
 <div id="agent_WebchatTab">
-    <span>Webchat</span>
+    <span onclick="crmForm_webchatTabClick()" style="width:100%;height:100%">Webchat</span>
     
 </div>
 
