@@ -46,8 +46,6 @@
 
 #agentPanel_buttonlist li {
     float:right;
-    margin-right:2px;
-    margin-left:2px;
     height:28px;
     border:1px;
 }
@@ -81,7 +79,7 @@
 
 #agent_WebchatPanel {
     width:500px;
-    height:400px;
+    height:410px;
     background-color:#FFFFFF;
     border-width:1px;
     border-style:solid;
@@ -107,4 +105,19 @@
 
 #webchat_InputArea {
     height:100px;
+}
+
+#webchat_Input {
+    height:98%;
+    width:98%;
+}
+
+#webchat_Buttons {
+    float:right;
+
+}
+
+#webchat_FormButtons ul li input {
+    height:18px;
+    width:18px;
 }

@@ -21,7 +21,7 @@ function crmForm_webchatTabClick() {
         var bheight = $(window).height();
         var tabwidth = $("#agent_WebchatTab").outerWidth(true);
         var tabheight = $("#agent_WebchatTab").outerHeight(true);
-        var panelheight = $("agent_WebchatPanel").outerHeight(true);
+        var panelheight = $("#agent_WebchatPanel").outerHeight(true);
         var left = 10;
         var top = bheight - tabheight - 2 - panelheight;
         $("#agent_WebchatPanel").css("left",left+"px").css("top",top+"px").show();
