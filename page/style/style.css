@@ -70,26 +70,31 @@
 
 #agent_WebchatTab {
     width:100px;
-    height:30px;
+    height:25px;
     text-align:center;
     z-index:100;
     position:absolute;
     border-style:solid;
+    border-color:#DDD;
+    display:none;
 }
 
 #agent_WebchatPanel {
     width:500px;
-    height:410px;
+    height:415px;
     background-color:#FFFFFF;
     border-width:1px;
     border-style:solid;
-    border-color:#DDD;
+    border-color:#CCC;
+    z-index:101;
+    position:absolute;
+    display:none;
 }
 
 #agent_WebchatHeader {
     width:100%;
     height:40px;
-    
+    background-color:#eaf0f6;
 }
 
 #webchat_FormButtons ul li {
@@ -101,6 +106,7 @@
 #agent_WebchatContent {
     width:100%;
     height:240px;
+    padding:3px;
 }
 
 #webchat_InputArea {
@@ -108,16 +114,29 @@
 }
 
 #webchat_Input {
-    height:98%;
+    height:92%;
     width:98%;
+    border-color:#DDD;
+    border-style:solid;
+    border-width:1px;
 }
 
 #webchat_Buttons {
-    float:right;
+    padding:3px;
 
 }
 
 #webchat_FormButtons ul li input {
     height:18px;
     width:18px;
+}
+
+#agent_WebchatFooter {
+    padding:3px;
+}
+
+#webchat_Buttons input {
+    padding-right:5px;
+    float:right;
+    width:auto;
 }

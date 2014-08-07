@@ -408,7 +408,7 @@ function agentCallOperation_toIntoAcw(flag)
 function agentTextChatOperation_toChatAnswer(callId)
 {
     var retJson=TextChat.answer({
-        "workno" : global_agentInfo.workno,
+        "workno" : global_agentInfo.agentId,
         "callid" : callId
     });
     var retResult = retJson.retcode;
@@ -428,7 +428,7 @@ function agentTextChatControl_getChatMessage(chatId, callId) {
     //是文本消息
     TextChat.getChatMessage({
         "chatid": chatId,
-        "workno": global_agentInfo.workno,
+        "workno": global_agentInfo.agentId,
         //$callback: function (result, data) {
         //    var res = JSON.parse(data.responseText);
         //    var retcode = res.retcode;
@@ -602,7 +602,7 @@ function agentTextChatControl_toDropChat() {
     var callId = global_currentTextChatCallId;
 
     TextChat.drop({
-        "workno": global_agentInfo.workno,
+        "workno": global_agentInfo.agentId,
         "callid": callId,
         $callback: function (result, data) {
             var res = JSON.parse(data.responseText);
@@ -638,7 +638,7 @@ function agentTextChatControl_toSendChat() {
     }
 
     TextChat.chat({
-        "workno": global_agentInfo.workno,
+        "workno": global_agentInfo.agentId,
         $entity: {
             "callid": callId,
             "content": msg

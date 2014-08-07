@@ -500,7 +500,6 @@ function Proc_AgentChat_DataRecved(oneEvent) {
  * @param oneEvent
  */
 function Proc_AgentChat_Disconnected(oneEvent) {
-    global_textChatCallNumber--;
     /**
 	*释放转时，座席会收到两个断连事件
 	*/
@@ -545,14 +544,8 @@ function Proc_AgentChat_Disconnected(oneEvent) {
  * @param oneEvent
  */
 function Proc_AgentChat_Connected(oneEvent) {
-    global_textChatCallNumber++;
-    global_agentCurCallType = AGENT_CALLTYPE.CHAT;
-    if (global_agentCurState == AGENT_STATE.IDLE
-			&& $("#agentCallControl_agentWorkStatus").hasClass("WorkStatus1")) {
-        updateIconState(global_agentCurCallType, global_agentCurState, global_callOperateType);
-    }
     var senderAddrType = oneEvent.content.senderaddrtype;
-    if (senderAddrType != ADDRESS_TYPE.AGENTID) {
+    //if (senderAddrType != ADDRESS_TYPE.AGENTID) {
         //不是内部呼叫
         switch (oneEvent.content.type) {
             case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
@@ -581,9 +574,8 @@ function Proc_AgentChat_Connected(oneEvent) {
                 break;
         }
         return;
-    }
-    agentCallControl_setAgentCallStatus("TALKING");
-    agentTextChatControl_connectedEvent(oneEvent);
+    //}
+
 
 }
 
@@ -598,14 +590,14 @@ function Proc_AgentChat_Ring(oneEvent) {
     //windwoMaximize();
     //mainFrame_addTab("tab_agentTextChat", "agentControlDiv_textChat", getNL("ZEUS.MAINFRAME.TEXTCHAT.MANAGEMENT"));
     var senderAddrType = oneEvent.content.senderaddrtype;
-    if (senderAddrType != ADDRESS_TYPE.AGENTID) {
+    //if (senderAddrType != ADDRESS_TYPE.AGENTID) {
         //callTime_computeTextChatAnswerNumber();
         switch (oneEvent.content.type) {
             case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
                 //agentCallControl_showEventMsg(getNL("ZEUS.TEXTCHAT.ONLINECHAT.COMING.HINT"));
                 //agentTextChatControl_ringEvent(oneEvent);
                 if (!($("#agent_WebchatTab").attr("callid")) || $("#agent_WebchatTab").attr("callid") == "") {
-                    var callid = oneEvent.con.callid;
+                    var callid = oneEvent.content.callid;
                     agentTextChatOperation_toChatAnswer(callid);
                 }
                 break;
@@ -626,7 +618,7 @@ function Proc_AgentChat_Ring(oneEvent) {
                 break;
         }
         return;
-    }
+    //}
     //agentCallControl_showEventMsg(getNL("ZEUS.TEXTCHAT.ONLINECHAT.COMING.HINT"));
     //agentTextChatControl_ringEvent(oneEvent);
     /*Start Modify 问题单号：DTS2012031406949,  修改时间：2012-3-24*/
