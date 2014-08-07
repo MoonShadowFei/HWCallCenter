@@ -583,7 +583,7 @@ function agentTextChatControl_getChatMessage(chatId, callId) {
                         content = "&nbsp;";
                     }
 
-                    html = "<div class='msg_head'><h2><span>" + sender + "&nbsp;" + curTime
+                    html = "<div class='msg_customer'><h2><span>" + sender + "&nbsp;" + curTime
 								+ "</span></h2></div><div><span class='msg_content'>" + content + "</span></div>";
                     $("#agent_WebchatContent").append(html);
                 default:
@@ -659,7 +659,7 @@ function agentTextChatControl_toSendChat() {
                     var curTime = hours + ":" + minutes + ":" + seconds;
                     var html = "";
 
-                    html = "<div class='msg_head'><h2><span>" + "Agent" + "&nbsp;" + curTime
+                    html = "<div class='msg_agent'><h2><span>" + "Agent" + "&nbsp;" + curTime
                     + "</span></h2><span class='msg_content'>" + msg + "</span></div>";
                     $("#agent_WebchatContent").append(html);
                     $("#webchat_Input").val("");

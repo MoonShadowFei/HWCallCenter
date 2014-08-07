@@ -212,7 +212,6 @@ function agentEventHandle(oneEvent) {
 
         case "AgentChat_Connected": //
             Proc_AgentChat_Connected(oneEvent);
-            callTime_startComputeTodayCall();
             break;
 
         case "AgentChat_Ring":  //文件交谈请求事件

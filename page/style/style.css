@@ -140,3 +140,21 @@
     float:right;
     width:auto;
 }
+
+.msg_customer h2 span {
+    color:#34a222;
+}
+
+.msg_agent h2 span{
+    color:#2fa0ec;
+}
+
+#agent_WebchatContent div h2 {
+    font-size:12px;
+    font-family:Microsoft YaHei,SimSun,Tahoma,Arial;
+}
+
+.msg_content {
+    font-size:12px;
+    font-family:Microsoft YaHei,SimSun,Tahoma,Arial;
+}
