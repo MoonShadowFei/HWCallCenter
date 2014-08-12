@@ -512,6 +512,7 @@ function Proc_AgentChat_Disconnected(oneEvent) {
         case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
             //agentTextChatControl_disconnectedEvent(oneEvent);
             $("#agent_WebchatTab").attr("callid", "");
+            $("#agent_WebchatTab").hide();
             $("#agent_WebchatContent").html("");
             $("#webchat_InputArea").val("");
             break;
@@ -607,8 +608,7 @@ function Proc_AgentChat_Ring(oneEvent) {
             case TEXTCHAT_MEDIATYPE[2]: //在线留言
                 break;
             case TEXTCHAT_MEDIATYPE[3]://邮件
-                agentCallControl_showEventMsg(getNL("ZEUS.TEXTCHAT.MAIL.COMING.HINT"));
-                agentMailChatControl_ringEvent(oneEvent);
+                agentTextChatOperation_toChatAnswer(callid);
                 break;
             case TEXTCHAT_MEDIATYPE[6]://传真
                 break;

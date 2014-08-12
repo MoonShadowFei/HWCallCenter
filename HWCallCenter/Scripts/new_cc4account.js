@@ -79,3 +79,38 @@ function agent_calloutFromList(ids) {
         window.parent.global_currentCalloutCallId = retJson.result;
     }
 }
+
+function agent_sendEmail() {
+    var param = {};
+
+    param.from = crm_getAttribute("new_fromemail");
+    param.to = crm_getAttribute("new_toemail");
+    param.cc = crm_getAttribute("new_ccemail");
+    param.bcc = crm_getAttribute("new_secretemail");
+    param.subject = crm_getAttribute("subject");
+    param.htmlcontent = crm_getAttribute("description");
+    param.origenMessageId = crm_getAttribute("new_ccid");
+
+    REST.apiURL = t_proxyUrl;
+    var cstring = $.cookie("agentcookiestring");
+    var agentId = $.cookie("cc_agentid");
+    cookiestring = cstring;
+    TextChat.replyEmailExWithOriContent({
+        "workno": agentId,
+        "callid": callId,
+        $entity: param,
+        $callback: function (result, data, entity) {
+
+        }
+    });
+}
+
+function crm_getAttribute(attName) {
+    var result;
+    if (attName && attName != "") {
+        result = Xrm.Page.getAttribute(attName).getValue();
+        return result;
+    } else {
+        return "";
+    }
+}
