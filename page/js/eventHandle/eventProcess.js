@@ -470,22 +470,6 @@ function Proc_AgentChat_DataRecved(oneEvent) {
             case TEXTCHAT_MEDIATYPE[0]: //在线文字聊天
                 agentTextChatControl_dataRecvedEvent(oneEvent);
                 break;
-            case TEXTCHAT_MEDIATYPE[1]://新浪微博
-            case TEXTCHAT_MEDIATYPE[4]://腾讯微博
-                agentWeiboChatControl_dataRecvedEvent(oneEvent);
-                break;
-            case TEXTCHAT_MEDIATYPE[2]:
-                agentOnlineMsgControl_dataRecvedEvent(oneEvent);
-                break;
-            case TEXTCHAT_MEDIATYPE[3]://邮件
-                agentMailChatControl_dataRecvedEvent(oneEvent);
-                break;
-            case TEXTCHAT_MEDIATYPE[6]://传真
-                agentFaxChatControl_dataRecvedEvent(oneEvent);
-                break;
-            case TEXTCHAT_MEDIATYPE[7]://语音留言
-                agentVoiceChatControl_dataRecvedEvent(oneEvent);
-                break;
             default:
                 break;
         }
@@ -516,21 +500,8 @@ function Proc_AgentChat_Disconnected(oneEvent) {
             $("#agent_WebchatContent").html("");
             $("#webchat_InputArea").val("");
             break;
-        case TEXTCHAT_MEDIATYPE[1]://新浪微博
-        case TEXTCHAT_MEDIATYPE[4]://腾讯微博
-            agentWeiboChatControl_disconnectedEvent(oneEvent);
-            break;
-        case TEXTCHAT_MEDIATYPE[2]://在线留言
-            agentOnlineMsgControl_disconnectedEvent(oneEvent);
-            break;
         case TEXTCHAT_MEDIATYPE[3]://邮件
-            agentMailChatControl_disconnectedEvent(oneEvent);
-            break;
-        case TEXTCHAT_MEDIATYPE[6]://传真
-            agentFaxChatControl_disconnectedEvent(oneEvent);
-            break;
-        case TEXTCHAT_MEDIATYPE[7]://语音留言
-            agentVoiceChatControl_disconnectedEvent(oneEvent);
+            
             break;
         default:
             break;
@@ -555,21 +526,8 @@ function Proc_AgentChat_Connected(oneEvent) {
                 $("#agent_WebchatTab").attr("callid", oneEvent.content.callid);
                 global_currentTextChatCallId = oneEvent.content.callid;
                 break;
-            case TEXTCHAT_MEDIATYPE[1]://新浪微博
-            case TEXTCHAT_MEDIATYPE[4]://腾讯微博
-                //agentWeiboChatControl_connectedEvent(oneEvent);
-                break;
-            case TEXTCHAT_MEDIATYPE[2]://在线留言
-                //agentOnlineMsgControl_connectedEvent(oneEvent);
-                break;
             case TEXTCHAT_MEDIATYPE[3]://邮件
-                //agentMailChatControl_connectedEvent(oneEvent);
-                break;
-            case TEXTCHAT_MEDIATYPE[6]://传真
-                //agentFaxChatControl_connectedEvent(oneEvent);
-                break;
-            case TEXTCHAT_MEDIATYPE[7]://语音留言
-                //agentVoiceChatControl_connectedEvent(oneEvent);
+                agentMailChatControl_connectedEvent(oneEvent);
                 break;
             default:
                 break;
@@ -586,8 +544,6 @@ function Proc_AgentChat_Connected(oneEvent) {
  */
 function Proc_AgentChat_Ring(oneEvent) {
     //agentCallControl_toCloseDialogWhenChat();
-    /*Start Modify 问题单号：DTS2012031406949,  修改时间：2012-3-24*/
-
     //windwoMaximize();
     //mainFrame_addTab("tab_agentTextChat", "agentControlDiv_textChat", getNL("ZEUS.MAINFRAME.TEXTCHAT.MANAGEMENT"));
     var senderAddrType = oneEvent.content.senderaddrtype;
@@ -608,6 +564,7 @@ function Proc_AgentChat_Ring(oneEvent) {
             case TEXTCHAT_MEDIATYPE[2]: //在线留言
                 break;
             case TEXTCHAT_MEDIATYPE[3]://邮件
+                var callid = oneEvent.content.callid;
                 agentTextChatOperation_toChatAnswer(callid);
                 break;
             case TEXTCHAT_MEDIATYPE[6]://传真
@@ -619,10 +576,63 @@ function Proc_AgentChat_Ring(oneEvent) {
         }
         return;
     //}
-    //agentCallControl_showEventMsg(getNL("ZEUS.TEXTCHAT.ONLINECHAT.COMING.HINT"));
-    //agentTextChatControl_ringEvent(oneEvent);
-    /*Start Modify 问题单号：DTS2012031406949,  修改时间：2012-3-24*/
+
 }
+
+
+function agentMailChatControl_connectedEvent(oneEvent) {
+    var attachData = oneEvent.content.attachdata;
+    attachData = JSON.parse(attachData);
+    if (attachData["messageId"] != null && attachData["messageId"] != undefined) {
+        var messageId = attachData["messageId"];
+        TextChat.getOriEmail({
+            "oriEmailId": messageId,
+            "workno": global_agentInfo.agentId,
+            $callback: function (result, data, entity) {
+                var res = entity;
+                var retcode = res.retcode;
+                switch (retcode) {
+                    case global_resultCode.SUCCESSCODE:
+                        var mailData = res.result;
+                        var from = mailData.from;
+                        var to = mailData.to;
+                        var subject = mailData.subject == null ? "" : mailData.subject;
+                        var sendDate = mailData.senddate;
+                        var textContent = mailData.textcontent;
+                        var result = crmData_createEmail(messageId, from, to, subject, textContent);
+
+                        var callId = event.content.callid;
+                        TextChat.drop({
+                            "workno": global_agentInfo.agentId,
+                            "callid": callId,
+                            $callback: function (result, data) {
+                                var res = JSON.parse(data.responseText);
+                                var retcode = res.retcode;
+                                switch (retcode) {
+                                    case global_resultCode.SUCCESSCODE:
+
+                                        break;
+
+                                        //根据错误码和错误信息，获取提示信息并弹框
+                                    default:
+                                        alert("failed to end the email!");
+                                        break;
+                                }
+                            }
+                        });
+                        break;
+                    default:
+                        alert("Get email info  failed. Retcode : " + retcode);
+                        break;
+                }
+            }
+        });
+        //
+        
+    }
+
+}
+
 
 function Proc_AgentChat_ShowWebchatTab() {
     var bwidth = $(window).width();

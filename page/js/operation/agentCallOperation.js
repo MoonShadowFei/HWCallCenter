@@ -556,30 +556,3 @@ function agentTextChatControl_toSendChat() {
         }
     });
 }
-
-function agentMailChatControl_dataRecvedEvent(oneEvent) {
-    agentMailChatControl_getMail(oneEvent.content.mailId, oneEvent.content.callid);
-}
-
-function agentMailChatControl_getMail(mailId, callId) {
-    TextChat.getOriEmail({
-        "oriEmailId": mailId,
-        "workno": global_agentInfo.gentId,
-        $callback: function (result, data, entity) {
-            var res = entity;
-            var retcode = res.retcode;
-            switch (retcode) {
-                case global_resultCode.SUCCESSCODE:
-                    var mailData = res.result;
-                    var from = mailData.from;
-                    var to = mailData.to;
-                    var subject = mailData.subject == null ? "" : mailData.subject;
-                    var sendDate = mailData.senddate;
-                    var textContent = mailData.textcontent;
-                    var result = crmData_createEmail(mailId, from, to, subject, textContent);
-                default:
-                    alert("Get email info  failed. Retcode : " + retcode);
-            }
-        }
-    });
-}

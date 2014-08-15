@@ -89,20 +89,17 @@ function agent_sendEmail() {
     param.bcc = crm_getAttribute("new_secretemail");
     param.subject = crm_getAttribute("subject");
     param.htmlcontent = crm_getAttribute("description");
-    param.origenMessageId = crm_getAttribute("new_ccid");
+    param.origenMessageId = crm_getAttribute("new_oriemailid");
 
     REST.apiURL = t_proxyUrl;
     var cstring = $.cookie("agentcookiestring");
     var agentId = $.cookie("cc_agentid");
     cookiestring = cstring;
-    TextChat.replyEmailExWithOriContent({
+    var retJson = TextChat.replyEmailWithoutCall({
         "workno": agentId,
-        "callid": callId,
         $entity: param,
-        $callback: function (result, data, entity) {
-
-        }
     });
+    var retResult = retJson.retcode;
 }
 
 function crm_getAttribute(attName) {
@@ -113,4 +110,38 @@ function crm_getAttribute(attName) {
     } else {
         return "";
     }
+}
+
+function agent_replyEmail() {
+    var param = {};
+
+    param["new_toemail"] = crm_getAttribute("new_fromemail");
+    param["new_fromemail"] = crm_getAttribute("new_toemail");
+    param["new_ccemail"] = crm_getAttribute("new_ccemail");
+    param["new_secretemail"] = crm_getAttribute("new_secretemail");
+    param["new_originalemail"] = Xrm.Page.data.entity.getId();
+
+    param["new_originalemailname"] = Xrm.Page.data.entity.getPrimaryAttributeValue();
+    param["subject"] = "Reply:" + crm_getAttribute("subject");
+    //param["description"] = crm_getAttribute("description");
+    var des = crm_getAttribute("description");
+    param["new_oriemailid"] = crm_getAttribute("new_ccid");
+    Xrm.Utility.openEntityForm("email", null, param);
+}
+
+function setPreEmailDesc() {
+    if (Xrm.Page.ui.getFormType()==1&&Xrm.Page.getAttribute("new_oriemailid").getValue() != null && Xrm.Page.getAttribute("new_originalemail").getValue() != null) {
+        var preEmailRef = Xrm.Page.getAttribute("new_originalemail").getValue();
+        var preEmailId = preEmailRef[0].id;
+        var preEmail = GetEntity("EmailSet", preEmailId);
+        var desc = preEmail.Description;
+        desc = "<br/><hr/>" + desc;
+        if (desc != null) {
+            Xrm.Page.getAttribute("description").setValue(desc);
+        }
+    }
+}
+
+function setDescOnload() {
+    setTimeout("setPreEmailDesc()", 1500);
 }
