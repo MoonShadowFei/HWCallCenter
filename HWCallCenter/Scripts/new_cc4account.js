@@ -81,25 +81,37 @@ function agent_calloutFromList(ids) {
 }
 
 function agent_sendEmail() {
-    var param = {};
+    Xrm.Page.data.save().then(function () {
+        var param = {};
 
-    param.from = crm_getAttribute("new_fromemail");
-    param.to = crm_getAttribute("new_toemail");
-    param.cc = crm_getAttribute("new_ccemail");
-    param.bcc = crm_getAttribute("new_secretemail");
-    param.subject = crm_getAttribute("subject");
-    param.htmlcontent = crm_getAttribute("description");
-    param.origenMessageId = crm_getAttribute("new_oriemailid");
+        param.from = crm_getAttribute("new_fromemail");
+        param.to = crm_getAttribute("new_toemail");
+        param.cc = crm_getAttribute("new_ccemail");
+        param.bcc = crm_getAttribute("new_secretemail");
+        param.subject = crm_getAttribute("subject");
+        param.htmlcontent = crm_getAttribute("description");
+        param.origenMessageId = crm_getAttribute("new_oriemailid");
 
-    REST.apiURL = t_proxyUrl;
-    var cstring = $.cookie("agentcookiestring");
-    var agentId = $.cookie("cc_agentid");
-    cookiestring = cstring;
-    var retJson = TextChat.replyEmailWithoutCall({
-        "workno": agentId,
-        $entity: param,
+        REST.apiURL = t_proxyUrl;
+        var cstring = $.cookie("agentcookiestring");
+        var agentId = $.cookie("cc_agentid");
+        cookiestring = cstring;
+        var retJson = TextChat.replyEmailWithoutCall({
+            "workno": agentId,
+            $entity: param,
+        });
+        var retResult = retJson.retcode;
+        switch (retResult) {
+            case 0:
+                alert("Send the email succeeded!");
+            default:
+                alert("Get email info  failed. Retcode : " + retResult);
+        }
+    },
+    function () {
+        alert("failed to save the email infomation!");
     });
-    var retResult = retJson.retcode;
+    
 }
 
 function crm_getAttribute(attName) {
